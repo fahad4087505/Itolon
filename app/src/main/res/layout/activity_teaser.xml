@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:paddingBottom="@dimen/_20sdp"
-                android:text="01:45"
+                android:visibility="gone"
                 android:id="@+id/duration_textview"
                 android:textColor="@color/blue_background" />
         </RelativeLayout>
