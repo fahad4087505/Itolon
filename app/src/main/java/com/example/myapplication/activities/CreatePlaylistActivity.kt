@@ -21,17 +21,18 @@ class CreatePlaylistActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        createPlaylistViewModel = ViewModelProvider.NewInstanceFactory().create(CreatePlaylistViewModel::class.java)
+        createPlaylistViewModel =
+            ViewModelProvider.NewInstanceFactory().create(CreatePlaylistViewModel::class.java)
         setContentView(R.layout.activity_create_playlist)
         back_imageview.setOnClickListener { finish() }
         create_playlist_textview.setOnClickListener {
-            if(playlist_name_edittext.text.toString().isNullOrEmpty()){
-                ViewUtils.showSnackBar(this@CreatePlaylistActivity,"Please Enter Playlist Name",true,"Retry")
-            }else if(playlist_description_edittext.text.toString().isNullOrEmpty()){
-                ViewUtils.showSnackBar(this@CreatePlaylistActivity,"Please Enter Playlist Description",true,"Retry")
-            }else{
+            if (playlist_name_edittext.text.toString().isNullOrEmpty()) {
+                ViewUtils.showSnackBar(this@CreatePlaylistActivity, "Please Enter Playlist Name", true, "Retry")
+            } else if (playlist_description_edittext.text.toString().isNullOrEmpty()) {
+                ViewUtils.showSnackBar(this@CreatePlaylistActivity, "Please Enter Playlist Description", true, "Retry")
+            } else {
                 getApiData()
-        }
+            }
         }
     }
 

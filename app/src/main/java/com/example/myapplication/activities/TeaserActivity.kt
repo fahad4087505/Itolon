@@ -138,6 +138,34 @@ class TeaserActivity : BaseActivity() {
             } catch (e: Exception) {
             }
         }
+
+        refresh_music_player.setOnClickListener {
+            try {
+                if (position >= 0) {
+                    try {
+                        if(mediaPlayer!!.isPlaying) {
+                            mediaPlayer!!.stop()
+                            mediaPlayer=null
+                        }
+                        isPlayFlag=false
+                        completeFlag = false
+                        firstTimePlay=false
+                        chronometer.base = SystemClock.elapsedRealtime()
+                        chronometer.stop()
+                        timeWhenStopped=0
+                        seconds=0
+                        elapsedMillis=0
+                        seekBar.progress = 0
+                        playMusic(Constants.songsArrayList[position])
+                        playSong()
+//                        position += 1
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            } catch (e: Exception) {
+            }
+        }
     }
 
     private fun playSong(){
