@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_15sdp"
+    android:background="@drawable/home_cell_border"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/home_cell_border">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/backgroundImageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_166sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/app_image"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            app:riv_oval="false"
+            app:riv_tile_mode="repeat" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/backgroundImageView"
+            android:background="@color/blue_background"
+            android:orientation="horizontal"
+            android:padding="@dimen/_2sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_45sdp"
+                android:src="@drawable/setting_icon" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_85sdp"
+                android:src="@drawable/previous_play_icon" />
+
+            <ImageView
+                android:id="@+id/play_icon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_41sdp"
+                android:background="@drawable/home_play_icon" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignLeft="@+id/play_icon"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_52sdp"
+                android:src="@drawable/next_play_icon" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_215sdp"
+                android:src="@drawable/replay_icon" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</FrameLayout>

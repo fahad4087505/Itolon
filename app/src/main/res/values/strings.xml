@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Itolon</string>
+    <string name="feed">Home</string>
+    <string name="search_track">Search Track</string>
+    <string name="incrivez_vous_c_set_gratuit">Incrivez-vous c\'set gratuit\n Crez vos collections de Musique\n Telechargez des millions de Chansons</string>
+    <string name="veuillez_saisir_le_code">Veuillez saisir le code\envoye au +233-58-86-63</string>
+    <string name="cancel_button_title">Cancel</string>
+    <string name="ok_button_title">OK</string>
+    <string name="spinner_title">Select</string>
+    <string name="nom_poanom"><![CDATA[Nom & Poanom]]></string>
+    <string name="soumettre">Soumettre</string>
+    <string name="lorem_ipsum_is_dummy_text_which_has_no_meaning">Lorem Ipsum is dummy text which\n has no meaning</string>
+    <string name="no_result_found">No Result Found</string>
+    <string name="agree">Yes</string>
+    <string name="disagree">No</string>
+</resources>
