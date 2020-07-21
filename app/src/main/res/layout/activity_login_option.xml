@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
-                    android:visibility="gone"
+
                     android:background="@drawable/shape_white_buttons"
                     android:gravity="center"
                     android:hint="Inscrire"
@@ -128,7 +128,7 @@
                     android:layout_margin="@dimen/_8sdp"
                     android:background="@drawable/shape_white_buttons"
                     android:backgroundTint="#3d5b99"
-                    android:visibility="gone"
+
                     android:gravity="center"
                     android:hint="Facebook"
 

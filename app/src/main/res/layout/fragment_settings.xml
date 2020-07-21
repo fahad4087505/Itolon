@@ -99,11 +99,7 @@
 
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,11 +131,13 @@
 
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -168,11 +166,13 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -200,11 +200,12 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_1sdp"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:alpha="0.1"-->
+<!--                android:background="#D3D3D3" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -233,11 +234,13 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -255,11 +258,19 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
+
             <LinearLayout
                 android:id="@+id/my_playlist_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
+
                 android:padding="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp">
 
@@ -272,17 +283,20 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:id="@+id/post_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
+
                 android:padding="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp">
 
@@ -296,11 +310,13 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -318,11 +334,13 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -340,11 +358,13 @@
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
-            <!--            <View-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_1sdp"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:background="#D3D3D3" />-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:background="#D3D3D3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -393,7 +413,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_4sdp"
-                android:textAllCaps="false"
                 android:background="@color/blue_background"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:paddingLeft="@dimen/_58sdp"
@@ -401,6 +420,7 @@
                 android:paddingRight="@dimen/_58sdp"
                 android:paddingBottom="@dimen/_11sdp"
                 android:text="Logout"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11ssp"
                 app:cornerRadius="@dimen/_5sdp" />
