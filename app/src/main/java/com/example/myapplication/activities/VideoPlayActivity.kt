@@ -7,7 +7,6 @@ import android.util.DisplayMetrics
 import android.widget.MediaController
 import com.app.bucapp.prefrences.Constants
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.activity_login_option.video_view
 import kotlinx.android.synthetic.main.activity_video_play.*
 
 

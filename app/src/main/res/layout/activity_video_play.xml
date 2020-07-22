@@ -1,12 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:layout_alignParentRight="true"
     android:layout_alignParentBottom="true"
     android:orientation="vertical"
+    android:background="@color/black"
     android:layout_gravity="fill_horizontal">
     <RelativeLayout
         android:id="@+id/action_bar"
@@ -14,6 +15,7 @@
         android:layout_height="@dimen/_40sdp"
         android:background="@color/blue_background"
         android:baselineAligned="false"
+        android:alpha="1"
         android:orientation="horizontal">
 
         <ImageView
@@ -43,10 +45,18 @@
             android:textSize="@dimen/_15ssp"
             android:visibility="visible" />
     </RelativeLayout>
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/action_bar"
+    android:alpha="0.4">
     <VideoView
         android:id="@+id/video_view"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_250sdp"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:visibility="visible" />
-</LinearLayout>
+</RelativeLayout>
+</RelativeLayout>

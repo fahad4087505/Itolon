@@ -28,15 +28,14 @@ class AlbumTracksAdapter(val items: List<Song>, val context: Context, val fragme
     override fun onBindViewHolder(holder: AlbumTracksViewHolder, position: Int) {
         try {
             holder.cellLayout.setOnClickListener {
-//                clickListener.onClick(position,"http://44.231.47.188"+items[position].content.filePath)
-                clickListener.onClick(position,"http://44.231.47.188"+items[position].content.filePath)
-//                context.startActivity(Intent(context, TeaserActivity::class.java))
+                clickListener.onClick(position, "http://44.231.47.188" + items[position].content.filePath)
             }
-                holder.trackCounterTextView.text=(position+1).toString()
-                holder.mSongTitleTextView.text=items[position].name
-                holder.mSongDescriptionTextView.text=items[position].description
-            holder.mDurationTextView.text=items[position].duration.toString()
-                Glide.with(context).load("http://44.231.47.188"+items[position].imagePath).placeholder(R.drawable.banner).error(R.drawable.banner).into(holder.mSongImageView)
+            holder.trackCounterTextView.text = (position + 1).toString()
+            holder.mSongTitleTextView.text = items[position].name
+            holder.mSongDescriptionTextView.text = items[position].description
+            holder.mDurationTextView.text = items[position].duration.toString()
+            Glide.with(context).load("http://44.231.47.188" + items[position].imagePath)
+                .placeholder(R.drawable.banner).error(R.drawable.banner).into(holder.mSongImageView)
         } catch (e: Exception) {
             e.printStackTrace()
         }

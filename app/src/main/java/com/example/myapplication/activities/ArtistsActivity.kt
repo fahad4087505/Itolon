@@ -53,8 +53,8 @@ class ArtistsActivity : BaseActivity(), SongItemClickListener {
     var playSongPosition=-1
     var manager: LinearLayoutManager? = null
     var items: MutableList<Song> = mutableListOf()
-    var defaultItems: MutableList<String> = mutableListOf()
-    var similiarArtistsList: MutableList<Similar> = mutableListOf()
+    private var defaultItems: MutableList<String> = mutableListOf()
+    private var similiarArtistsList: MutableList<Similar> = mutableListOf()
     private lateinit var artistDetailsViewModel: ArtistDetailsViewModel
     private var mediaPlayer: MediaPlayer? = null
     private var duration=""

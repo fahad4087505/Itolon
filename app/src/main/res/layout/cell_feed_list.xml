@@ -12,22 +12,27 @@
         android:layout_height="@dimen/_200sdp"
         android:layout_gravity="center_vertical"
         android:background="@drawable/home_cell_border">
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_5sdp"
+            android:id="@+id/cp_cardview"
+            >
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/backgroundImageView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_166sdp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@drawable/app_image"
             app:riv_border_color="#333333"
             app:riv_mutate_background="true"
             app:riv_oval="false"
             app:riv_tile_mode="repeat" />
-
+        </androidx.cardview.widget.CardView>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/backgroundImageView"
+            android:layout_below="@+id/cp_cardview"
             android:background="@color/blue_background"
             android:orientation="horizontal"
             android:padding="@dimen/_2sdp">

@@ -6,16 +6,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.WindowManager
-import android.widget.Toast
-import android.widget.VideoView
 import com.example.myapplication.R
 import com.example.myapplication.prefrences.SharedPref
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_login_option.*
-import kotlinx.android.synthetic.main.activity_login_option.video_view
-import kotlinx.android.synthetic.main.activity_video_play.*
 
 class LoginOptionActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

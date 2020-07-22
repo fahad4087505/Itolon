@@ -171,15 +171,31 @@ class StarsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface {
                 val body = jsonResponse.getJSONObject("body")
                 val response = gson.fromJson(body.toString(), StarsModel::class.java)
                 if (response.meta.code == 205) {
-                    items.addAll(response.result)
+                    if(response.result!=null&&response.result.size>0) {
+                        trackVisibility(true)
+                        items.addAll(response.result)
+                    }else{
+                        trackVisibility(false)
+                    }
                     feedRecyclerview.adapter!!.notifyDataSetChanged()
                 } else {
+                    trackVisibility(false)
                     showErrorDialog(response.meta.message)
-                    Toast.makeText(this,response.meta.message, Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this,response.meta.message, Toast.LENGTH_LONG).show()
                 }
             }else{
+                trackVisibility(false)
                 showErrorDialog("Server is not responding")
             }
         })
+    }
+    private fun trackVisibility(flag:Boolean){
+        if(flag){
+            swipeToRefresh.visibility= View.VISIBLE
+            no_result_textview.visibility= View.GONE
+        }else{
+            swipeToRefresh.visibility= View.GONE
+            no_result_textview.visibility= View.VISIBLE
+        }
     }
 }
