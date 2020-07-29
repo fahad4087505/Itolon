@@ -162,7 +162,7 @@
                     android:layout_weight="1"
                     android:id="@+id/language_change_textview"
                     android:gravity="right"
-                    android:text="English"
+                    android:text="French"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
