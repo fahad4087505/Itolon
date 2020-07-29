@@ -65,7 +65,7 @@
             android:drawablePadding="@dimen/_8sdp"
             android:gravity="left"
             android:padding="@dimen/_10sdp"
-            android:hint="Albem, Nom Artist, Nom de Musique"
+            android:hint="@string/albem_nom_artist_nom_de_musique"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
@@ -96,7 +96,7 @@
             android:layout_marginLeft="@dimen/_7sdp"
             android:gravity="center_vertical"
             android:padding="@dimen/_6sdp"
-            android:text="Mes Telechargements"
+            android:text="@string/mes_telechargements"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
     </LinearLayout>
@@ -176,7 +176,7 @@
             android:layout_marginLeft="@dimen/_7sdp"
             android:gravity="center_vertical"
             android:padding="@dimen/_6sdp"
-            android:text="Albems"
+            android:text="@string/albems"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
     </LinearLayout>
@@ -216,7 +216,7 @@
             android:layout_marginLeft="@dimen/_7sdp"
             android:gravity="center_vertical"
             android:padding="@dimen/_6sdp"
-            android:text="Playlists"
+            android:text="@string/playlists"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
     </LinearLayout>
@@ -256,7 +256,7 @@
             android:layout_marginLeft="@dimen/_7sdp"
             android:gravity="center_vertical"
             android:padding="@dimen/_6sdp"
-            android:text="Stars"
+            android:text="@string/stars"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
     </LinearLayout>

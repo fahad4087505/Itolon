@@ -55,7 +55,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
-                android:text="Prenom"
+                android:text="@string/prenom"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -87,7 +87,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
-                android:text="Nom de l'enterprise"
+                android:text="@string/nom_de_l_enterprise"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -119,7 +119,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
-                android:text="Addresse"
+                android:text="@string/addresse"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -152,7 +152,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
-                android:text="Ville"
+                android:text="@string/ville"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -183,7 +183,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Region"
+                android:text="@string/region"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -215,7 +215,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Tel Numero"
+                android:text="@string/tel_numero"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -247,7 +247,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Email"
+                android:text="@string/email"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -279,7 +279,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Website"
+                android:text="@string/website"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -311,7 +311,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Media d Internet"
+                android:text="@string/media_d_internet"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/black"
                 android:textColorHint="@color/hint_color" />
@@ -330,7 +330,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@android:color/white"
                     android:checked="false"
-                    android:text="Musique"
+                    android:text="@string/musique"
                     android:textColor="@android:color/white" />
 
                 <CheckBox
@@ -339,7 +339,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@android:color/white"
                     android:checked="false"
-                    android:text="Music Video"
+                    android:text="@string/music_video"
                     android:textColor="@android:color/white" />
 
                 <CheckBox
@@ -348,7 +348,7 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@android:color/white"
                     android:checked="false"
-                    android:text="Concert Publication"
+                    android:text="@string/concert_publication"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -396,7 +396,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:buttonTint="@color/black"
                     android:checked="true"
-                    android:text="Remember Me"
+                    android:text="@string/remember_me"
                     android:textColor="@color/black"
                     android:visibility="gone" />
 
@@ -423,7 +423,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="?attr/selectableItemBackground"
                     android:padding="4dp"
-                    android:text="LogIn"
+                    android:text="@string/login"
                     android:textColor="@color/white"
                     android:visibility="visible" />
             </LinearLayout>

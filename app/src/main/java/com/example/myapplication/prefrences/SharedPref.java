@@ -15,6 +15,7 @@ public class SharedPref {
     public static final String USER_TYPE = "USER_TYPE";
     public static final String TOKEN_REGISTER_TIME = "TOKEN_REGISTER_TIME";
     public static final String PAUSE_TIME = "PAUSE_TIME";
+    public static final String PROFILE_IMAGE = "PROFILE_IMAGE";
     private SharedPref() {
     }
 

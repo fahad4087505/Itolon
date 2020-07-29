@@ -105,7 +105,7 @@
                 android:layout_marginLeft="@dimen/_12sdp"
                 android:gravity="center_vertical"
                 android:padding="@dimen/_4sdp"
-                android:text="Create Playlist"
+                android:text="@string/create_playlist"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold" />
@@ -150,7 +150,7 @@
                     android:drawablePadding="@dimen/_8sdp"
 
                     android:gravity="left"
-                    android:hint="Playlist name"
+                    android:hint="@string/playlist_name"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
@@ -173,7 +173,7 @@
                     android:background="@drawable/border_playlist_edittext"
                     android:drawablePadding="@dimen/_8sdp"
                     android:gravity="top|left"
-                    android:hint="Enter Description"
+                    android:hint="@string/enter_description"
                     android:inputType="textMultiLine"
                     android:lines="8"
                     android:maxLines="10"
@@ -207,7 +207,7 @@
                     android:paddingTop="@dimen/_11sdp"
                     android:paddingRight="@dimen/_58sdp"
                     android:paddingBottom="@dimen/_11sdp"
-                    android:text="Create"
+                    android:text="@string/create"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11ssp" />
 <!--            </LinearLayout>-->

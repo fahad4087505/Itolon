@@ -50,7 +50,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_85sdp"
-                android:src="@drawable/previous_play_icon" />
+                android:src="@drawable/next_play_icon" />
 
             <ImageView
                 android:id="@+id/play_icon"
@@ -68,7 +68,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_52sdp"
-                android:src="@drawable/next_play_icon" />
+                android:src="@drawable/previous_play_icon" />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"

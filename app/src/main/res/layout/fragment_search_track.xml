@@ -73,6 +73,9 @@
             android:drawableRight="@drawable/ic_mic_black_24dp"
             android:drawablePadding="@dimen/_8sdp"
             android:gravity="left"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
             android:hint="Albem, Nom Artist, Nom de Musique"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/white"
@@ -89,7 +92,7 @@
         android:layout_marginLeft="@dimen/_16sdp"
         android:gravity="center_vertical"
         android:padding="@dimen/_6sdp"
-        android:text="Albems"
+        android:text="@string/albems"
         android:textColor="@color/white"
         android:textSize="@dimen/_15ssp" />
 
@@ -116,5 +119,5 @@
         android:textColor="@color/white"
         android:layout_below="@+id/title_textview"
         android:layout_gravity="center"
-        android:text="No Result Found" />
+        android:text="@string/no_result_found" />
 </RelativeLayout>

@@ -4,27 +4,23 @@ import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AbsListView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.bucapp.prefrences.Constants
+import com.example.myapplication.prefrences.Constants
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapters.*
 import com.example.myapplication.base.BaseActivity
-import com.example.myapplication.model.allartistmodel.AllArtistModel
 import com.example.myapplication.model.artistdetailmodel.ArtistDetail
 import com.example.myapplication.model.artistdetailmodel.Similar
 import com.example.myapplication.model.artistdetailmodel.Song
 import com.example.myapplication.prefrences.SharedPref
 import com.example.myapplication.utils.Utils
 import com.example.myapplication.utils.ViewUtils
-import com.example.myapplication.viewmodel.AllArtistsViewModel
 import com.example.myapplication.viewmodel.ArtistDetailsViewModel
 import com.google.gson.Gson
 import com.krishna.fileloader.FileLoader
@@ -277,7 +273,7 @@ class ArtistsActivity : BaseActivity(), SongItemClickListener {
         for(i in 0 until Constants.songsArrayList.size){
             if(Constants.songsArrayList.get(i).contains(fileName)){
                 playSongPosition=i
-                playFilePath=Constants.songsArrayList.get(i)
+                playFilePath= Constants.songsArrayList.get(i)
             }
         }
         return playSongPosition

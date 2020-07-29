@@ -69,12 +69,11 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/inscrire_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
-
                     android:background="@drawable/shape_white_buttons"
                     android:gravity="center"
                     android:hint="Inscrire"
@@ -83,9 +82,9 @@
                     android:paddingTop="@dimen/_7sdp"
                     android:paddingRight="@dimen/_2sdp"
                     android:paddingBottom="@dimen/_7sdp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/hint_color"
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:textColorHint="@color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
 
@@ -121,8 +120,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center">
-
-                <TextView
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/facebookLoginButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/_15sdp"
+                    android:paddingTop="@dimen/_15sdp"
+                    android:visibility="gone" />
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_8sdp"
@@ -131,6 +136,7 @@
 
                     android:gravity="center"
                     android:hint="Facebook"
+                    android:id="@+id/facebook_textview"
 
                     android:paddingLeft="@dimen/_2sdp"
                     android:paddingTop="@dimen/_7sdp"

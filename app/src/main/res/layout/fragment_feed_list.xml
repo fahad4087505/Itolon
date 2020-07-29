@@ -75,7 +75,10 @@
             android:drawablePadding="@dimen/_8sdp"
             android:gravity="left"
             android:padding="@dimen/_10sdp"
-            android:hint="Albem, Nom Artist, Nom de Musique"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:hint="@string/albem_nom_artist_nom_de_musique"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
@@ -164,7 +167,7 @@
         android:maxLines="1"
         android:visibility="gone"
         android:layout_below="@+id/slider_cardview"
-        android:text="No Data Found"
+        android:text="@string/no_result_found"
         android:singleLine="true"
         android:ellipsize="end"
         android:id="@+id/no_data_textview"

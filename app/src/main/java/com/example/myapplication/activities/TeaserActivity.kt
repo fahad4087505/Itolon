@@ -6,7 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.core.content.ContextCompat
-import com.app.bucapp.prefrences.Constants
+import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.R
 import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.model.albumdetailmodel.Song
@@ -140,31 +140,36 @@ class TeaserActivity : BaseActivity() {
         }
 
         refresh_music_player.setOnClickListener {
-            try {
-                if (position >= 0) {
-                    try {
-                        if(mediaPlayer!!.isPlaying) {
-                            mediaPlayer!!.stop()
-                            mediaPlayer=null
-                        }
-                        isPlayFlag=false
-                        completeFlag = false
-                        firstTimePlay=false
-                        chronometer.base = SystemClock.elapsedRealtime()
-                        chronometer.stop()
-                        timeWhenStopped=0
-                        seconds=0
-                        elapsedMillis=0
-                        seekBar.progress = 0
-                        playMusic(Constants.songsArrayList[position])
-                        playSong()
-//                        position += 1
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+            refreshSong()
+        }
+    }
+    private fun refreshSong(){
+        try {
+            if (position >= 0 ) {
+                try {
+                    if(mediaPlayer!!.isPlaying) {
+                        mediaPlayer!!.stop()
+                        mediaPlayer=null
                     }
+                    isPlayFlag=false
+                    completeFlag = false
+                    firstTimePlay=false
+                    chronometer.base = SystemClock.elapsedRealtime()
+                    chronometer.stop()
+                    timeWhenStopped=0
+                    seconds=0
+                    elapsedMillis=0
+                    seekBar.progress = 0
+                    playMusic(Constants.songsArrayList[position])
+                    playSong()
+//                        position += 1
                 }
-            } catch (e: Exception) {
+                catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -262,7 +267,7 @@ class TeaserActivity : BaseActivity() {
     private fun playRandom(){
        val random = Random()
        val songIndex = random.nextInt(Constants.songsArrayList.size)
-       if (songIndex > 0) {
+       if (songIndex >= 0 && Constants.songsArrayList.size>1) {
             try {
                 if(mediaPlayer!!.isPlaying) {
                     mediaPlayer!!.stop()
@@ -283,6 +288,8 @@ class TeaserActivity : BaseActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }
+        }else{
+           refreshSong()
+       }
     }
 }

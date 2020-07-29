@@ -1,4 +1,4 @@
-package com.app.bucapp.prefrences
+package com.example.myapplication.prefrences
 
 object Constants {
 

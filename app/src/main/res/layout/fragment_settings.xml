@@ -150,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Language"
+                    android:text="@string/language"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
 
@@ -160,6 +160,7 @@
                     android:layout_gravity="right"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_weight="1"
+                    android:id="@+id/language_change_textview"
                     android:gravity="right"
                     android:text="English"
                     android:textColor="@android:color/white"
@@ -185,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Notifications"
+                    android:text="@string/notifications"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
 
@@ -253,7 +254,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Contact Us"
+                    android:text="@string/contact_us"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -279,7 +280,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="My Playlists"
+                    android:text="@string/my_playlists"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -305,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Posts"
+                    android:text="@string/posts"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -329,7 +330,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Privacy Policy"
+                    android:text="@string/privacy_policy"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -353,7 +354,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Term and Conditions"
+                    android:text="@string/term_and_conditions"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -377,7 +378,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="About US"
+                    android:text="@string/about_us"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -419,7 +420,7 @@
                 android:paddingTop="@dimen/_11sdp"
                 android:paddingRight="@dimen/_58sdp"
                 android:paddingBottom="@dimen/_11sdp"
-                android:text="Logout"
+                android:text="@string/logout"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11ssp"

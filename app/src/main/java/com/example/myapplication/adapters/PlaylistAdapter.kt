@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.activities.PlaylistActivity
-import com.example.myapplication.activities.TeaserActivity
-import com.example.myapplication.fragments.FeedFragment
 import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
 import com.example.myapplication.model.playlistdetailmodel.PlaylistResult

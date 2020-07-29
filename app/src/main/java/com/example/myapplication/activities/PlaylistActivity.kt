@@ -20,6 +20,7 @@ import com.example.myapplication.base.BaseActivity
 import com.example.myapplication.model.allartistmodel.AllArtistModel
 import com.example.myapplication.model.playlistdetailmodel.PlaylistDetail
 import com.example.myapplication.model.playlistdetailmodel.PlaylistResult
+import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.prefrences.SharedPref
 import com.example.myapplication.utils.Utils
 import com.example.myapplication.viewmodel.AllArtistsViewModel
@@ -49,6 +50,8 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
     var count: Int = 6
     var clickPosition=-1
     private var duration=""
+    var playFilePath=""
+    var playSongPosition=-1
     private lateinit var playlistDetailViewModel: PlaylistDetailViewModel
     private var mediaPlayer: MediaPlayer? = null
     val songsArrayList=ArrayList<String>()
@@ -146,6 +149,26 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
 
     override fun onClick(position: Int, songUrl: String) {
         clickPosition=position
+//        clickPosition=position
+        if(songUrl.contains(".mp3"))
+        {
+            Constants.songsArrayList.addAll(songsArrayList)
+            playSongPosition=computePosition(songUrl)
+            if(playSongPosition!=-1) {
+                startActivity(Intent(this@PlaylistActivity, TeaserActivity::class.java).putExtra("position", playSongPosition).putExtra("currentPlaylistItemTrack", items[clickPosition]))
+                playSongPosition = -1
+            }else{
+                showSnackBar("File is not exist",false)
+            }
+        }else{
+            Constants.songsArrayList.addAll(videoArrayList)
+            playSongPosition=computePosition(songUrl)
+            if(playSongPosition!=-1) {
+                startActivity(Intent(this@PlaylistActivity, VideoPlayActivity::class.java).putExtra("position", playSongPosition))
+            }else{
+                showSnackBar("File is not exist",false)
+            }
+        }
 //        downloadFile(songUrl)
     }
     private fun downloadFile(url: String) {
@@ -196,5 +219,15 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
         mediaPlayer!!.prepare()
         duration = Utils.getInstance().getDurationInMinutes(mediaPlayer!!.duration.toLong())
         return duration
+    }
+    private fun computePosition(songUrl: String):Int{
+        val fileName=Utils.getInstance().getLastString(songUrl)
+        for(i in 0 until Constants.songsArrayList.size){
+            if(Constants.songsArrayList.get(i).contains(fileName)){
+                playSongPosition=i
+                playFilePath= Constants.songsArrayList.get(i)
+            }
+        }
+        return playSongPosition
     }
 }

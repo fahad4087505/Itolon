@@ -52,7 +52,7 @@
                     android:layout_marginRight="@dimen/_25sdp"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="Posts"
+                    android:text="@string/posts"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_17ssp"
                     android:visibility="visible" />

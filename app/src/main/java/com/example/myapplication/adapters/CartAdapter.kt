@@ -1,29 +1,20 @@
 package com.example.myapplication.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.activities.CartActivity
-import com.example.myapplication.activities.PlaylistActivity
-import com.example.myapplication.activities.TeaserActivity
-import com.example.myapplication.fragments.FeedFragment
 import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
-import com.example.myapplication.model.albumdetailmodel.AlbumDetailResult
 import com.example.myapplication.model.albumdetailmodel.Song
 import kotlinx.android.synthetic.main.cell_cart.view.*
-import kotlinx.android.synthetic.main.cell_cart.view.song_description_textview
-import kotlinx.android.synthetic.main.cell_cart.view.song_imageview
-import kotlinx.android.synthetic.main.cell_cart.view.song_title_textview
 
 class CartAdapter(val items: List<Song>, val context: Context, val fragment: CartActivity,val clickListener: SongClickListener) :
     RecyclerView.Adapter<CartViewHolder>() {

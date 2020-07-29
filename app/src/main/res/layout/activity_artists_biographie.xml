@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:text="About"
+                android:text="@string/about"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:text="More by:"
+                android:text="@string/more_by"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
@@ -200,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:text="Most Popular Tracks"
+                android:text="@string/most_popular_tracks"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 
@@ -255,7 +255,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:text="Similar to"
+                android:text="@string/similar_to"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp" />
 

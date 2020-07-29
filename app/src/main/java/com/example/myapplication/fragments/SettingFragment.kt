@@ -1,12 +1,13 @@
 package com.example.myapplication.fragments
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,16 +23,22 @@ import com.example.myapplication.utils.Utils
 import com.example.myapplication.utils.ViewUtils
 import com.example.myapplication.viewmodel.ProfileViewModel
 import com.google.gson.Gson
+import com.koushikdutta.ion.Ion
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.view.*
-import kotlinx.android.synthetic.main.fragment_settings.view.profile_image
 import org.json.JSONObject
+import pl.aprilapps.easyphotopicker.DefaultCallback
+import pl.aprilapps.easyphotopicker.EasyImage
+import java.io.File
+import java.util.*
+import kotlin.collections.HashMap
+
 
 class SettingFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
     val progressBar = CustomProgressBar()
     private var mView:View ?= null
-
+    var myLocale: Locale? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_settings, container, false)
         profileViewModel = ViewModelProvider.NewInstanceFactory().create(ProfileViewModel::class.java)
@@ -43,6 +50,10 @@ class SettingFragment : Fragment() {
         mView!!.user_name_textview.text=SharedPref.read(SharedPref.USER_NAME,"")
         mView!!.post_layout.setOnClickListener {
             startActivity(Intent(activity, PostsActivity::class.java))
+        }
+        mView!!.language_change_textview.setOnClickListener {
+            setLocale("fr");
+//            startActivity(Intent(activity, PostsActivity::class.java))
         }
         val hashMap = HashMap<String, String>()
         hashMap["outh_token"] =SharedPref.read(SharedPref.AUTH_TOKEN,"")
@@ -63,8 +74,71 @@ class SettingFragment : Fragment() {
             }
 
         }
+        view.profile_image.setOnClickListener {
+            EasyImage.openChooserWithGallery(this, "Select", 3)
+        }
         view.my_playlist_layout.setOnClickListener {
             startActivity(Intent(requireActivity(),MyPlaylistActivity::class.java))
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        EasyImage.handleActivityResult(requestCode, resultCode, data, activity, object : DefaultCallback() {
+                override fun onImagePicked(
+                    imageFile: File?,
+                    source: EasyImage.ImageSource?,
+                    type: Int
+                ) {
+                    Glide.with(requireActivity()).load(imageFile!!).placeholder(R.drawable.logo).error(R.drawable.logo).into(profile_image)
+//                    uploadFile(imageFile!!)
+                }
+
+                override fun onImagePickerError(
+                    e: Exception?,
+                    source: EasyImage.ImageSource?,
+                    type: Int
+                ) {
+                }
+            })
+    }
+
+
+    fun setLocale(lang: String?) {
+        myLocale = Locale(lang)
+        val res: Resources = resources
+        val dm: DisplayMetrics = res.getDisplayMetrics()
+        val conf: Configuration = res.getConfiguration()
+        conf.locale = myLocale
+        res.updateConfiguration(conf, dm)
+        finishAffinity(activity!!)
+//        val refresh =
+        startActivity(Intent(activity!!, LoginOptionActivity::class.java))
+    }
+
+    private fun uploadFile(file: File) {
+
+        try {
+            progressBar.show(requireActivity())
+            Ion.with(requireActivity())
+                .load("http://217.61.59.204/index.php/upload_profile_image/")
+                .setMultipartFile("image", file)
+                .asJsonObject().setCallback { e, result ->
+                    if (e == null) {
+                        progressBar.dialog.dismiss()
+                        if (result.get("status").asInt == 200) {
+//                            SharedPref.write(SharedPref.PROFILE_IMAGE,result.get("data").asJsonObject.get("image").asString.toString())
+//
+//                            Toast.makeText(this, result.get("message").asString, Toast.LENGTH_LONG).show()
+                        } else {
+//                            showDialog(result.get("message").asString)
+                        }
+                    } else {
+                        progressBar.dialog.dismiss()
+//                        showDialog(e.message.toString())
+                    }
+                }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
     private fun logoutUser(){

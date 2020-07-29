@@ -5,7 +5,7 @@
     android:background="@drawable/screen_background"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -18,13 +18,14 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_2sdp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_2sdp"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_arrow_back_black_24dp" />
 
         <TextView
             android:id="@+id/titleTextview"
-            android:layout_width="330dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -32,10 +33,11 @@
             android:gravity="center"
             android:maxLines="1"
             android:text="Payment"
+            android:layout_centerInParent="true"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
             android:visibility="visible" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -168,7 +170,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginRight="@dimen/_30sdp"
             android:padding="@dimen/_6sdp"
-            android:text="Soumettre"
+            android:text="@string/soumettre"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />

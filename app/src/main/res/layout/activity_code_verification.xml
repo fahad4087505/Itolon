@@ -248,7 +248,7 @@
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:paddingBottom="@dimen/_8sdp"
-                    android:text="Verifier"
+                    android:text="@string/verifier"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold" />
@@ -280,7 +280,7 @@
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:paddingBottom="@dimen/_8sdp"
-                    android:text="Renvoyer le code"
+                    android:text="@string/renvoyer_le_code"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold" />

@@ -1,5 +1,7 @@
 package com.example.myapplication.activities
 import android.content.Intent
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,6 +22,7 @@ import com.example.myapplication.model.albumdetailmodel.AlbumDetailModel
 import com.example.myapplication.model.albumdetailmodel.AlbumDetailResult
 import com.example.myapplication.model.albumdetailmodel.Song
 import com.example.myapplication.model.albummodel.Album
+import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.prefrences.SharedPref
 import com.example.myapplication.utils.Utils
 import com.example.myapplication.utils.ViewUtils
@@ -51,8 +54,14 @@ class CartActivity : BaseActivity(), SongClickListener {
     var manager: LinearLayoutManager? = null
     var count: Int = 6
     var clickPosition=-1
+    var playFilePath=""
+    var playSongPosition=-1
     var items: MutableList<Song> = mutableListOf()
     private var filePath = ""
+    private var mediaPlayer: MediaPlayer? = null
+    private var duration=""
+    val songsArrayList=ArrayList<String>()
+    val videoArrayList=ArrayList<String>()
     private lateinit var albumDetailViewModel: AlbumDetailViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,6 +151,9 @@ class CartActivity : BaseActivity(), SongClickListener {
                             trackVisibility(true)
                             track_counter_textview.text = response.result.songs.size.toString() + " Tracks"
                             items.addAll(response.result.songs)
+                            for(i in 0 until response.result.songs.size){
+                                downloadFile("http://44.231.47.188"+response.result.songs[i].content.filePath,i)
+                            }
                         }else{
                             trackVisibility(false)
                         }
@@ -160,32 +172,75 @@ class CartActivity : BaseActivity(), SongClickListener {
         })
     }
 
-    private fun downloadFile(url: String) {
-        progressBar.show(this)
-        FileLoader.with(this).load(url, false)
-            .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object :
-                FileRequestListener<File> {
+    private fun downloadFile(url: String,position:Int) {
+        if(!progressBar.dialog.isShowing) {
+            progressBar.show(this)
+        }
+        FileLoader.with(this).load(url, false) //2nd parameter is optioal, pass true to force load from network
+            .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object : FileRequestListener<File> {
                 override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
                     val loadedFile = response.body
-                    filePath = loadedFile.path
-                    progressBar.dialog.dismiss()
-                    if(loadedFile.path. contains(".mp3")) {
-                        startActivity(Intent(this@CartActivity, TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentItem", items.get(clickPosition)))
+                    if(loadedFile.path.contains(".mp3")) {
+                        items[position].duration=getDuration( loadedFile.path)
+                        songsArrayList.add(loadedFile.path)
                     }else{
-                        startActivity(Intent(this@CartActivity, VideoPlayActivity::class.java).putExtra("filePath",loadedFile.path))
+                        items[position].duration=getDuration( loadedFile.path)
+                        videoArrayList.add(loadedFile.path)
                     }
                     clickPosition=-1
+                    popular_tracks_recyclerview.adapter!!.notifyDataSetChanged()
+                    progressBar.dialog.dismiss()
                 }
                 override fun onError(request: FileLoadRequest, t: Throwable) {
                     progressBar.dialog.dismiss()
-                    showErrorDialog("File format not supported")
                 }
             })
     }
+//    private fun downloadFile(url: String) {
+//        progressBar.show(this)
+//        FileLoader.with(this).load(url, false)
+//            .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object :
+//                FileRequestListener<File> {
+//                override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
+//                    val loadedFile = response.body
+//                    filePath = loadedFile.path
+//                    progressBar.dialog.dismiss()
+//                    if(loadedFile.path. contains(".mp3")) {
+//                        startActivity(Intent(this@CartActivity, TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentItem", items.get(clickPosition)))
+//                    }else{
+//                        startActivity(Intent(this@CartActivity, VideoPlayActivity::class.java).putExtra("filePath",loadedFile.path))
+//                    }
+//                    clickPosition=-1
+//                }
+//                override fun onError(request: FileLoadRequest, t: Throwable) {
+//                    progressBar.dialog.dismiss()
+//                    showErrorDialog("File format not supported")
+//                }
+//            })
+//    }
 
     override fun onClick(position: Int, songUrl: String) {
         clickPosition=position
-        downloadFile(songUrl)
+        if(songUrl.contains(".mp3"))
+        {
+            Constants.songsArrayList.addAll(songsArrayList)
+            playSongPosition=computePosition(songUrl)
+            if(playSongPosition!=-1) {
+                startActivity(Intent(this@CartActivity, TeaserActivity::class.java).putExtra("position", playSongPosition).putExtra("currentPlaylistItemTrack", items[clickPosition]))
+                playSongPosition = -1
+            }else{
+                showSnackBar("File is not exist",false)
+            }
+        }else{
+            Constants.songsArrayList.addAll(videoArrayList)
+            playSongPosition=computePosition(songUrl)
+            if(playSongPosition!=-1) {
+                startActivity(Intent(this@CartActivity, VideoPlayActivity::class.java).putExtra("position", playSongPosition))
+            }else{
+                showSnackBar("File is not exist",false)
+            }
+        }
+//        downloadFile(songUrl)
     }
 
     private fun trackVisibility(flag:Boolean){
@@ -196,5 +251,25 @@ class CartActivity : BaseActivity(), SongClickListener {
             track_scrollview.visibility= View.GONE
             no_result_textview.visibility= View.VISIBLE
         }
+    }
+    private fun getDuration(filePath: String):String {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer()
+        }
+        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mediaPlayer!!.setDataSource(filePath)
+        mediaPlayer!!.prepare()
+        duration = Utils.getInstance().getDurationInMinutes(mediaPlayer!!.duration.toLong())
+        return duration
+    }
+    private fun computePosition(songUrl: String):Int{
+        val fileName=Utils.getInstance().getLastString(songUrl)
+        for(i in 0 until Constants.songsArrayList.size){
+            if(Constants.songsArrayList.get(i).contains(fileName)){
+                playSongPosition=i
+                playFilePath= Constants.songsArrayList.get(i)
+            }
+        }
+        return playSongPosition
     }
 }

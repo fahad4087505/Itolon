@@ -74,7 +74,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:text="Artist Profile"
+                    android:text="@string/artist_profile"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -98,7 +98,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:text="Artist Image"
+                    android:text="@string/artist_image"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Artist Biographie"
+                    android:text="@string/artist_biographie"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Telecharger Vos Musique"
+                    android:text="@string/telecharger_vos_musique"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Telecharger Vos Musique Video"
+                    android:text="@string/telecharger_vos_musique_video"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Telecharger Vos Musique Concert"
+                    android:text="@string/telecharger_vos_musique_concert"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_13ssp" />
             </LinearLayout>
@@ -222,7 +222,7 @@
                     android:paddingTop="@dimen/_11sdp"
                     android:paddingRight="@dimen/_58sdp"
                     android:paddingBottom="@dimen/_11sdp"
-                    android:text="Logout"
+                    android:text="@string/logout"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11ssp" />
             </LinearLayout>

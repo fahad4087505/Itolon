@@ -3,9 +3,8 @@ package com.example.myapplication.activities
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.widget.MediaController
-import com.app.bucapp.prefrences.Constants
+import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.R
 import kotlinx.android.synthetic.main.activity_video_play.*
 

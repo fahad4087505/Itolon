@@ -54,7 +54,7 @@
                     android:gravity="center"
                     android:maxLines="1"
 
-                    android:text="Playlists"
+                    android:text="@string/playlists"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp"
                     android:visibility="visible" />
@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:text="Tracklist"
+                    android:text="@string/tracklist"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />
 
@@ -188,7 +188,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginRight="@dimen/_10sdp"
-                    android:text="Shuffle"
+                    android:text="@string/shuffle"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />
             </RelativeLayout>
@@ -255,7 +255,7 @@
                 android:visibility="visible"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:text="No Result Found" />
+                android:text="@string/no_result_found" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/artists_recyclerview"
                 android:layout_width="match_parent"

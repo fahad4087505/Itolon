@@ -40,7 +40,7 @@
             android:layout_marginRight="@dimen/_25sdp"
             android:gravity="center"
             android:maxLines="1"
-            android:text="Video"
+            android:text="@string/video"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
             android:visibility="visible" />

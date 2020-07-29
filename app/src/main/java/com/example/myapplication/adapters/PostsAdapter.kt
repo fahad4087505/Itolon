@@ -13,12 +13,10 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.activities.PostsActivity
 import com.example.myapplication.activities.PostsDescriptionActivity
-import com.example.myapplication.activities.TeaserActivity
 import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
 import com.example.myapplication.model.postsmodel.PostResult
 import kotlinx.android.synthetic.main.cell_posts.view.*
-import java.lang.Exception
 
 class PostsAdapter(val items: List<PostResult>, val context: Context, val fragment: PostsActivity) :
     RecyclerView.Adapter<PostsViewHolder>() {

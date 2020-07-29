@@ -134,7 +134,7 @@
             android:layout_below="@+id/upload_icon_imageview"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="@string/lorem_ipsum_is_dummy_text_which_has_no_meaning"
+            android:text="@string/upload_track"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 
@@ -154,7 +154,7 @@
         android:layout_below="@+id/artist_track_recyclerview"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="Select a Category"
+        android:text="@string/select_a_category"
         android:textColor="@android:color/white" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/song_category_recyclerview"
@@ -256,7 +256,7 @@
         android:paddingTop="@dimen/_10sdp"
         android:paddingRight="@dimen/_5sdp"
         android:paddingBottom="@dimen/_10sdp"
-        android:text="Sauvegarder"
+        android:text="@string/sauvegarder"
         android:textColor="@color/white"
         android:textColorHighlight="@color/white"
         android:textColorHint="@color/white"
