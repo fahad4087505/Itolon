@@ -2,6 +2,7 @@ package com.example.myapplication.network
 
 import androidx.lifecycle.LiveData
 import com.example.myapplication.activities.CreatePlaylistActivity
+import com.example.myapplication.model.addcommentsmodel.AddCommentModel
 import com.example.myapplication.model.albumdetailmodel.AlbumDetailModel
 import com.example.myapplication.model.allartistmodel.AllArtistModel
 import com.example.myapplication.model.albummodel.Album
@@ -86,7 +87,11 @@ interface RetrofitServices {
 
     @POST("/api/auth/logout")
     fun logoutUser(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<DefaultModel>>
+    @POST("/api/post/comment")
+    fun addComments(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<AddCommentModel>>
+    @POST("/api/ads")
+    fun getAds(): LiveData<ApiResponse<DefaultModel>>
 
-    @POST("/api/screen/images?screen_type=welcome")
+    @POST("/api/screen/images?screen_type=home")
     fun getScreenImages(): LiveData<ApiResponse<ScreenImages>>
 }

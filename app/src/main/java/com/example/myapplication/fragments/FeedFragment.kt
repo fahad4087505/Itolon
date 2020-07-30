@@ -249,6 +249,7 @@ class FeedFragment : Fragment(), FeedLikeClickInterface, ClickInterface, Recycle
         Utils.getInstance().killMediaPlayer(null)
     }
 
+
     private fun downloadFile(url: String) {
         progressBar.show(activity!!)
         FileLoader.with(activity).load(url, false) //2nd parameter is optioal, pass true to force load from network

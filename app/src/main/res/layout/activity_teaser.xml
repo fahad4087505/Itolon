@@ -229,34 +229,36 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:gravity="center">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
             android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_42sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:id="@+id/shuffle_music_play"
-            android:background="@drawable/setting_icon"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/setting_icon"
             android:paddingLeft="@dimen/_2sdp"
             android:paddingRight="@dimen/_2sdp">
-        </RelativeLayout>
+        </ImageView>
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
             android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_42sdp"
             android:layout_marginRight="@dimen/_30sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:id="@+id/previous_song_play_icon"
-            android:background="@drawable/next_play_icon"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/next_play_icon"
             android:paddingLeft="@dimen/_2sdp"
             android:paddingRight="@dimen/_2sdp">
-        </RelativeLayout>
+        </ImageView>
 
         <RelativeLayout
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_alignRight="@+id/playButtonLayout"
             android:layout_marginTop="@dimen/_40sdp"
             android:id="@+id/play_song_imageview"
@@ -270,36 +272,38 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_centerInParent="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:id="@+id/play_icon_imageview"
-                android:backgroundTint="@color/blue_background"
-                android:background="@drawable/ic_baseline_play_arrow_24">
+                android:src="@drawable/ic_baseline_play_arrow_24">
 
             </ImageView>
         </RelativeLayout>
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
             android:layout_marginLeft="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_42sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/next_song_play_icon"
-            android:background="@drawable/previous_play_icon"
+            android:src="@drawable/previous_play_icon"
             android:paddingLeft="@dimen/_2sdp"
             android:paddingRight="@dimen/_2sdp">
-        </RelativeLayout>
+        </ImageView>
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="@dimen/_18sdp"
             android:layout_height="@dimen/_18sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_42sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:id="@+id/refresh_music_player"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@drawable/replay_icon"
+            android:src="@drawable/replay_icon"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:paddingLeft="@dimen/_2sdp"
             android:paddingRight="@dimen/_2sdp">
-        </RelativeLayout>
+        </ImageView>
     </LinearLayout>
 </RelativeLayout>

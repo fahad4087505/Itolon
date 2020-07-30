@@ -201,7 +201,7 @@
                 android:id="@+id/no_result_textview"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:text="No Result Found" />
+                android:text="@string/no_result_found" />
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/track_scrollview"
                 android:layout_width="match_parent"
@@ -233,7 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:text="Artists in Playlist"
+                    android:text="@string/artists_in_playlist"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp" />
 

@@ -36,12 +36,12 @@ class PostsAdapter(val items: List<PostResult>, val context: Context, val fragme
             holder.cellLayout.setOnClickListener {
                 try {
                     if(!items[position].content[0].filePath.isNullOrEmpty()){
-                    context.startActivity(Intent(context, PostsDescriptionActivity::class.java).putExtra("title",items[position].title).putExtra("description",items[position].description).putExtra("imageUrl","http://44.231.47.188" + items[position].content[0].filePath))
+                    context.startActivity(Intent(context, PostsDescriptionActivity::class.java).putExtra("title",items[position].title).putExtra("description",items[position].description).putExtra("imageUrl","http://44.231.47.188" + items[position].content[0].filePath).putExtra("postId",items[position].id.toString()))
                 }else{
-                        context.startActivity(Intent(context, PostsDescriptionActivity::class.java).putExtra("title",items[position].title).putExtra("description",items[position].description))
+                        context.startActivity(Intent(context, PostsDescriptionActivity::class.java).putExtra("title",items[position].title).putExtra("description",items[position].description).putExtra("postId",items[position].id.toString()))
                     }
                 } catch (e: Exception) {
-                    context.startActivity(Intent(context, PostsDescriptionActivity::class.java).putExtra("title",items[position].title).putExtra("description",items[position].description))
+                    context.startActivity(Intent(context, PostsDescriptionActivity::class.java).putExtra("title",items[position].title).putExtra("description",items[position].description).putExtra("postId",items[position].id.toString()))
                     e.printStackTrace()
                 }
             }

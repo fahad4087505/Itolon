@@ -57,9 +57,9 @@
     <string name="already_have_an_account">Already have an Account?</string>
     <string name="mes_telechargements">Mes Telechargements</string>
 <!--    <string name="artists">Artists</string>-->
-    <string name="albems">Albems</string>
+    <string name="albems">Albums</string>
     <string name="playlists">Playlists</string>
-    <string name="stars">Stars</string>
+    <string name="stars">Top Stars</string>
     <string name="video">Video</string>
     <string name="artist_profile">Artist Profile</string>
     <string name="artist_image">Artist Image</string>
@@ -77,4 +77,10 @@
     <string name="term_and_conditions">Term and Conditions</string>
     <string name="about_us">About US</string>
     <string name="upload_track">Upload Track</string>
+    <string name="post">Post</string>
+    <string name="add_comments">Add Comments</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="artists_in_playlist">Artists in Playlist</string>
 </resources>

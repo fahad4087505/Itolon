@@ -6,18 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.app.colepower.view.CustomProgressBar
 import com.example.myapplication.R
 import com.example.myapplication.activities.*
+import com.example.myapplication.model.defaultmodel.DefaultModel
+import com.example.myapplication.viewmodel.AdvertismentViewModel
+import com.example.myapplication.viewmodel.PostsViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import org.json.JSONObject
 
 class SearchFragment : Fragment() {
+    val progressBar = CustomProgressBar()
+    private lateinit var advertismentViewModel: AdvertismentViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
+        advertismentViewModel = ViewModelProvider.NewInstanceFactory().create(AdvertismentViewModel::class.java)
         init(view)
         return view
     }
 
     private fun init(view: View) {
+//        getAdvertisments()
         view.stars_layout.setOnClickListener {
             startActivity(Intent(activity, StarsActivity::class.java).putExtra("title","Stars"))
         }
@@ -33,5 +46,24 @@ class SearchFragment : Fragment() {
         view.playlist_layout.setOnClickListener {
             startActivity(Intent(activity, PlaylistsActivity::class.java).putExtra("title","Playlist"))
         }
+    }
+    private fun getAdvertisments() {
+        progressBar.show(activity!!)
+        advertismentViewModel.adsLiveData!!.observe(activity!!, Observer { tokenResponse ->
+            val gson = Gson()
+            val json = gson.toJson(tokenResponse)
+            val jsonResponse = JSONObject(json)
+            progressBar.dialog.dismiss()
+            if (jsonResponse.has("body")) {
+                val body = jsonResponse.getJSONObject("body")
+                val response = gson.fromJson(body.toString(), DefaultModel::class.java)
+                if (response.meta.code == 210) {
+                } else {
+//                    showErrorDialog(response.meta.message)
+                }
+            }else{
+//                showErrorDialog("Server is not responding")
+            }
+        })
     }
 }

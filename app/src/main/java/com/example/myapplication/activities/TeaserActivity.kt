@@ -224,18 +224,9 @@ class TeaserActivity : BaseActivity() {
             e.printStackTrace()
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
-        try {
-            if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
-                mediaPlayer!!.stop()
-                mediaPlayer!!.release()
-                mediaPlayer = null
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        stopMediaPlayer()
     }
 
     private fun startTime() {
@@ -291,5 +282,23 @@ class TeaserActivity : BaseActivity() {
         }else{
            refreshSong()
        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stopMediaPlayer()
+    }
+
+
+    private fun stopMediaPlayer(){
+        try {
+            if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
+                mediaPlayer!!.stop()
+                mediaPlayer!!.release()
+                mediaPlayer = null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

@@ -22,7 +22,9 @@ public class PostResult {
     @SerializedName("content")
     @Expose
     private List<Content> content = null;
-
+    @SerializedName("comments")
+    @Expose
+    private List<Comment> comments = null;
     public Integer getId() {
         return id;
     }
@@ -62,5 +64,11 @@ public class PostResult {
     public void setContent(List<Content> content) {
         this.content = content;
     }
+    public List<Comment> getComments() {
+        return comments;
+    }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
