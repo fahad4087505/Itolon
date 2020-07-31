@@ -1,29 +1,28 @@
 package com.example.myapplication.activities
+import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
+import android.media.MediaMetadataRetriever
+import android.media.MediaMetadataRetriever.METADATA_KEY_DURATION
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.adapters.ArtistAdapter
 import com.example.myapplication.adapters.PlaylistAdapter
 import com.example.myapplication.adapters.PlaylistItemClickListener
 import com.example.myapplication.base.BaseActivity
-import com.example.myapplication.model.allartistmodel.AllArtistModel
 import com.example.myapplication.model.playlistdetailmodel.PlaylistDetail
-import com.example.myapplication.model.playlistdetailmodel.PlaylistResult
+import com.example.myapplication.model.playlistdetailmodel.Song
 import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.prefrences.SharedPref
 import com.example.myapplication.utils.Utils
-import com.example.myapplication.viewmodel.AllArtistsViewModel
 import com.example.myapplication.viewmodel.PlaylistDetailViewModel
 import com.google.gson.Gson
 import com.krishna.fileloader.FileLoader
@@ -31,15 +30,13 @@ import com.krishna.fileloader.listener.FileRequestListener
 import com.krishna.fileloader.pojo.FileResponse
 import com.krishna.fileloader.request.FileLoadRequest
 import kotlinx.android.synthetic.main.activity_playlists.*
-import kotlinx.android.synthetic.main.activity_playlists.artists_recyclerview
-import kotlinx.android.synthetic.main.activity_playlists.back_arrow_imageview
-import kotlinx.android.synthetic.main.activity_playlists.playlist_recyclerview
-import kotlinx.android.synthetic.main.activity_playlists.profile_image
-import kotlinx.android.synthetic.main.activity_playlists.tracks_count
-import kotlinx.android.synthetic.main.activity_teaser.*
 import org.json.JSONObject
 import java.io.File
-import java.util.HashMap
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableList
+import kotlin.collections.mutableListOf
+import kotlin.collections.set
 
 class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
     var isScrolling: Boolean? = false
@@ -57,7 +54,7 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
     val songsArrayList=ArrayList<String>()
     val videoArrayList=ArrayList<String>()
 
-    var items: MutableList<PlaylistResult> = mutableListOf()
+    var items: MutableList<Song> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         playlistDetailViewModel = ViewModelProvider.NewInstanceFactory().create(PlaylistDetailViewModel::class.java)
@@ -119,60 +116,76 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
             val gson = Gson()
             val json = gson.toJson(tokenResponse)
             val jsonResponse = JSONObject(json)
-            progressBar.dialog.dismiss()
             if (jsonResponse.has("body")) {
                 val body = jsonResponse.getJSONObject("body")
                 val response = gson.fromJson(body.toString(), PlaylistDetail::class.java)
                 if (response.meta.code == 205) {
-                    tracks_count.text=response.result.size.toString()+" Tracks"
-                    if(response.result.size>0) {
+                    tracks_count.text=response.result.songs.size.toString()+" Tracks"
+                    if(response.result.songs.size>0) {
                         trackVisibility(true)
-                        items.addAll(response.result)
-                        for(i in 0 until response.result.size){
-                            downloadFile("http://44.231.47.188"+response.result[i].content.filePath)
-                            items[i].duration=getDuration("http://44.231.47.188"+response.result[i].content.filePath)
+                        items.addAll(response.result.songs)
+                        for(i in 0 until response.result.songs.size){
+                            downloadFile("http://44.231.47.188"+response.result.songs[i].content.filePath)
+                            if(response.result.songs[i].content.filePath.toString().contains(".mp3")){
+                                items[i].duration=getDuration("http://44.231.47.188"+response.result.songs[i].content.filePath)
+                            }else{
+                                val retriever = MediaMetadataRetriever()
+                                retriever.setDataSource("http://44.231.47.188"+response.result.songs[i].content.filePath, HashMap())
+                                val time = retriever.extractMetadata(METADATA_KEY_DURATION)
+                                val timeInMillisec = time.toLong()
+                                retriever.release()
+                                items[i].duration = Utils.getInstance().getDurationInMinutes(timeInMillisec)
+                            }
+//                            items[i].duration=getMediaDuration(this@PlaylistActivity,"http://44.231.47.188"+response.result.songs[i].content.filePath).toString()
+//                            items[i].duration=gettotaltimestorage("http://44.231.47.188"+response.result.songs[i].content.filePath)
                         }
                         playlist_recyclerview.adapter!!.notifyDataSetChanged()
+                        progressBar.dialog.dismiss()
                     }else{
                         trackVisibility(false)
+                        progressBar.dialog.dismiss()
                     }
                 } else if(response.meta.code==404) {
                     trackVisibility(false)
+                    progressBar.dialog.dismiss()
                 }else {
                     trackVisibility(false)
+                    progressBar.dialog.dismiss()
                 }
             }else{
+                progressBar.dialog.dismiss()
                 trackVisibility(false)
             }
         })
     }
 
     override fun onClick(position: Int, songUrl: String) {
-        clickPosition=position
+        clickPosition = position
 //        clickPosition=position
-        if(songUrl.contains(".mp3"))
-        {
+        if (songUrl.contains(".mp3")) {
             Constants.songsArrayList.addAll(songsArrayList)
-            playSongPosition=computePosition(songUrl)
-            if(playSongPosition!=-1) {
+            playSongPosition = computePosition(songUrl)
+            if (playSongPosition != -1) {
                 startActivity(Intent(this@PlaylistActivity, TeaserActivity::class.java).putExtra("position", playSongPosition).putExtra("currentPlaylistItemTrack", items[clickPosition]))
                 playSongPosition = -1
-            }else{
-                showSnackBar("File is not exist",false)
+            } else {
+                showSnackBar("File is not exist", false)
             }
-        }else{
+        } else {
             Constants.songsArrayList.addAll(videoArrayList)
-            playSongPosition=computePosition(songUrl)
-            if(playSongPosition!=-1) {
-                startActivity(Intent(this@PlaylistActivity, VideoPlayActivity::class.java).putExtra("position", playSongPosition))
-            }else{
-                showSnackBar("File is not exist",false)
+            playSongPosition = computePosition(songUrl)
+            if (playSongPosition != -1) {
+                startActivity(Intent(this@PlaylistActivity, VideoPlayActivity::class.java).putExtra("position", playSongPosition).putExtra("is_purchased",items[playSongPosition].isPurchased))
+            } else {
+                showSnackBar("File is not exist", false)
             }
         }
 //        downloadFile(songUrl)
     }
     private fun downloadFile(url: String) {
-        progressBar.show(this)
+        if(!progressBar.dialog.isShowing) {
+            progressBar.show(this)
+        }
         FileLoader.with(this).load(url, false) //2nd parameter is optioal, pass true to force load from network
             .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object : FileRequestListener<File> {
                 override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
@@ -211,13 +224,17 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
     }
 
     private fun getDuration(filePath: String):String {
-        if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer()
+        try {
+            if (mediaPlayer == null) {
+                mediaPlayer = MediaPlayer()
+            }
+            mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            mediaPlayer!!.setDataSource(filePath)
+            mediaPlayer!!.prepare()
+            duration = Utils.getInstance().getDurationInMinutes(mediaPlayer!!.duration.toLong())
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        mediaPlayer!!.setDataSource(filePath)
-        mediaPlayer!!.prepare()
-        duration = Utils.getInstance().getDurationInMinutes(mediaPlayer!!.duration.toLong())
         return duration
     }
     private fun computePosition(songUrl: String):Int{
@@ -229,5 +246,14 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
             }
         }
         return playSongPosition
+    }
+    fun getMediaDuration(context: Context,filePath: String): Long {
+//        if (!exists()) return 0
+        val retriever = MediaMetadataRetriever()
+        retriever.setDataSource(context, Uri.parse(filePath))
+        val duration = retriever.extractMetadata(METADATA_KEY_DURATION)
+        retriever.release()
+
+        return duration.toLongOrNull() ?: 0
     }
 }

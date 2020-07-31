@@ -60,14 +60,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:layout_weight="0.15">
+            android:layout_weight="0.25">
             <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/add_to_playlist"
+                android:layout_margin="@dimen/_8sdp"
+                android:src="@drawable/playlist" />
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/_7sdp"
-                android:background="@drawable/ic_baseline_more_horiz_24"
-                android:gravity="center_vertical|right" />
+                android:layout_margin="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:id="@+id/duration_textview"
+                android:gravity="center_vertical|right"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

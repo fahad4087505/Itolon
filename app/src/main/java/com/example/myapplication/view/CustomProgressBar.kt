@@ -31,6 +31,7 @@ class CustomProgressBar {
         view.cp_title.setTextColor(Color.WHITE) //Text Color
         dialog = Dialog(context, R.style.CustomProgressBarTheme)
         dialog.setContentView(view)
+        dialog.setCancelable(false)
         if (dialog != null && !dialog.isShowing) {
             dialog.show()
         }

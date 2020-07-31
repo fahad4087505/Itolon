@@ -3,6 +3,7 @@ package com.example.myapplication.network
 import androidx.lifecycle.LiveData
 import com.example.myapplication.activities.CreatePlaylistActivity
 import com.example.myapplication.model.addcommentsmodel.AddCommentModel
+import com.example.myapplication.model.addtoplaylistmodel.AddToPlaylistModel
 import com.example.myapplication.model.albumdetailmodel.AlbumDetailModel
 import com.example.myapplication.model.allartistmodel.AllArtistModel
 import com.example.myapplication.model.albummodel.Album
@@ -67,6 +68,9 @@ interface RetrofitServices {
     @POST("/api/user/playlists")
     fun getPlaylists(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<PlaylistModel>>
 
+    @POST("/api/user/add_song_playlist")
+    fun addToPlaylist(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<AddToPlaylistModel>>
+
     @POST("api/user/all-artists")
     fun getAllArtists(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<AllArtistModel>>
 
@@ -87,8 +91,10 @@ interface RetrofitServices {
 
     @POST("/api/auth/logout")
     fun logoutUser(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<DefaultModel>>
+
     @POST("/api/post/comment")
     fun addComments(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<AddCommentModel>>
+
     @POST("/api/ads")
     fun getAds(): LiveData<ApiResponse<DefaultModel>>
 

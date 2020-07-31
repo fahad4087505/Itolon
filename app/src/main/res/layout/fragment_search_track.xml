@@ -92,7 +92,6 @@
         android:layout_marginLeft="@dimen/_16sdp"
         android:gravity="center_vertical"
         android:padding="@dimen/_6sdp"
-        android:text="@string/albems"
         android:textColor="@color/white"
         android:textSize="@dimen/_15ssp" />
 

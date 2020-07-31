@@ -2,8 +2,10 @@ package com.example.myapplication.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.AbsListView
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,9 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.adapters.PlayListClickListener
 import com.example.myapplication.adapters.PlaylistsAdapter
 import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
+import com.example.myapplication.model.addtoplaylistmodel.AddToPlaylistModel
 import com.example.myapplication.model.playlistmodel.PlaylistModel
 import com.example.myapplication.model.playlistmodel.PlaylistResult
 import com.example.myapplication.prefrences.SharedPref
@@ -27,7 +31,8 @@ import kotlinx.android.synthetic.main.fragment_search_track.*
 import org.json.JSONObject
 import java.util.*
 
-class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface {
+class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface,
+    PlayListClickListener {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
     var totalItems: Int = 0
@@ -36,9 +41,9 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
     var count: Int = 6
     var items: MutableList<PlaylistResult> = mutableListOf()
     var searchItem: MutableList<PlaylistResult> = mutableListOf()
-
+    var songId=-1
     private lateinit var playlistViewModel: PlaylistViewModel
-
+    var isAddToPlaylist=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         playlistViewModel = ViewModelProvider.NewInstanceFactory().create(PlaylistViewModel::class.java)
@@ -48,15 +53,21 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
 
     private fun init() {
         getApiData()
-        titleTextview?.text ="Search Track"
+        if(intent.hasExtra("id")){
+            songId=intent.getIntExtra("id",-1)
+            titleTextview?.text = "Select Playlist"
+            isAddToPlaylist=true
+        }else {
+            titleTextview?.text = "Search Track"
+            isAddToPlaylist=false
+        }
         if(intent.hasExtra("title")){
             title_textview.text=intent.getStringExtra("title")
         }
         setAdapter(items)
         search_data_edittext.addTextChangedListener(object : TextWatcher {
-            override   fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {
+            override  fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if(!s.toString().isNullOrEmpty()){
                     searchValue(s.toString())
@@ -65,7 +76,6 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
                     setAdapter(items)
                 }
             }
-
             override   fun afterTextChanged(editable: Editable?) {}
         })
         swipeToRefresh?.setOnRefreshListener {
@@ -97,6 +107,21 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
             hashMap["device_token"] = SharedPref.read(SharedPref.REFRESH_TOKEN,"")
             playlistViewModel.getPlaylists(hashMap)
             getResponse()
+            progressBar.show(this)
+        }
+        else{
+            showErrorDialog("No Internet Connection")
+        }
+    }
+    private fun addApiData(playlistId:Int){
+        if (Utils.getInstance().isNetworkConnected(this@PlaylistsActivity)) {
+            val hashMap = HashMap<String, String>()
+            hashMap["outh_token"] = SharedPref.read(SharedPref.AUTH_TOKEN,"")
+            hashMap["device_token"] = SharedPref.read(SharedPref.REFRESH_TOKEN,"")
+            hashMap["playlist_id"] =playlistId.toString()
+            hashMap["song_id"] =songId.toString()
+            playlistViewModel.addToPlaylist(hashMap)
+            getAddToPlaylistResponse()
             progressBar.show(this)
         }
         else{
@@ -144,7 +169,7 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
 
     private fun setAdapter(itemsArray:MutableList<PlaylistResult>){
         manager = GridLayoutManager(this@PlaylistsActivity,3)
-        feedRecyclerview?.adapter = PlaylistsAdapter(itemsArray, (this@PlaylistsActivity), this)
+        feedRecyclerview?.adapter = PlaylistsAdapter(itemsArray, (this@PlaylistsActivity), this,this)
         feedRecyclerview?.layoutManager = manager
     }
     private fun getResponse() {
@@ -166,5 +191,35 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
                 showErrorDialog("Server is not responding")
             }
         })
+    }
+    private fun getAddToPlaylistResponse() {
+        playlistViewModel.addToPlaylistLiveData!!.observe(this, Observer { tokenResponse ->
+            val gson = Gson()
+            val json = gson.toJson(tokenResponse)
+            val jsonResponse = JSONObject(json)
+            progressBar.dialog.dismiss()
+            if (jsonResponse.has("body")) {
+                val body = jsonResponse.getJSONObject("body")
+                val response = gson.fromJson(body.toString(), AddToPlaylistModel::class.java)
+                if (response.meta.code == 210) {
+                    ViewUtils.showSnackBar(this,response.meta.message,true,"")
+                    Handler().postDelayed({
+                        finish()
+                    }, 2 * 1000)
+                } else {
+                    showErrorDialog(response.meta.message)
+                }
+            }else{
+                showErrorDialog(getString(R.string.server_is_not_responding))
+            }
+        })
+    }
+
+    override fun onClick(position: Int, playListId: Int) {
+        if(isAddToPlaylist) {
+            addApiData(playListId)
+        }else{
+            startActivity(Intent(this,PlaylistActivity::class.java).putExtra("id",items[position].playlistId.toString()).putExtra("title",items[position].name))
+        }
     }
 }

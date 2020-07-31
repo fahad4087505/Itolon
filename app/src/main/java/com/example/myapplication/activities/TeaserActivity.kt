@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.R
 import com.example.myapplication.base.BaseActivity
@@ -57,8 +58,8 @@ class TeaserActivity : BaseActivity() {
             }
             if (intent.hasExtra("currentPlaylistItemTrack")) {
                 playlistResult = intent.getSerializableExtra("currentPlaylistItemTrack") as PlaylistResult
-                track_name_textview.text = playlistResult!!.name
-                artist_name_textview.text = playlistResult!!.artistName
+                track_name_textview.text = playlistResult!!.songs[position].name
+//                artist_name_textview.text = playlistResult!!.songs[position].
             }
             if (intent.hasExtra("currentItemDownloaded")) {
                 albumDetailModelDownloads = intent.getSerializableExtra("currentItemDownloaded") as UserDownloadResult
@@ -179,7 +180,8 @@ class TeaserActivity : BaseActivity() {
         }
         if (!isPlayFlag) {
             isPlayFlag = true
-            play_icon_imageview.background = ContextCompat.getDrawable(this@TeaserActivity, R.drawable.ic_baseline_pause_24)
+            Glide.with(this).load(R.drawable.ic_baseline_pause_24).into(play_icon_imageview)
+//            play_icon_imageview.background = ContextCompat.getDrawable(this@TeaserActivity, R.drawable.ic_baseline_pause_24)
             if (mediaPlayer != null && !firstTimePlay) {
                 firstTimePlay = true
                 startTime()
@@ -192,7 +194,8 @@ class TeaserActivity : BaseActivity() {
             mediaPlayer?.start()
         } else {
             isPlayFlag = false
-            play_icon_imageview.background = ContextCompat.getDrawable(this@TeaserActivity, R.drawable.ic_baseline_play_arrow_24)
+            Glide.with(this).load(R.drawable.ic_baseline_play_arrow_24).into(play_icon_imageview)
+//            play_icon_imageview.background = ContextCompat.getDrawable(this@TeaserActivity, R.drawable.ic_baseline_play_arrow_24)
             timeWhenStopped = chronometer.base - SystemClock.elapsedRealtime()
             chronometer.stop()
             mediaPlayer?.pause()

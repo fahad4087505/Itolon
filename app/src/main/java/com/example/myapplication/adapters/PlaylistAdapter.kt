@@ -1,12 +1,10 @@
 package com.example.myapplication.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +14,10 @@ import com.example.myapplication.activities.PlaylistActivity
 import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
 import com.example.myapplication.model.playlistdetailmodel.PlaylistResult
+import com.example.myapplication.model.playlistdetailmodel.Song
 import kotlinx.android.synthetic.main.cell_playlist.view.*
 
-class PlaylistAdapter(val items: List<PlaylistResult>, val context: Context, val fragment: PlaylistActivity,val clickListener: PlaylistItemClickListener) :
+class PlaylistAdapter(val items: List<Song>, val context: Context, val fragment: PlaylistActivity, val clickListener: PlaylistItemClickListener) :
     RecyclerView.Adapter<PlaylistViewHolder>() {
     private var selectPosition: Int = -1
     private var oldPosition: Int = -1

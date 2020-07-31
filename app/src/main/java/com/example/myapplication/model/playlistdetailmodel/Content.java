@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Content implements Serializable {
+public class Content  implements Serializable {
 
     @SerializedName("file_name")
     @Expose

@@ -18,7 +18,7 @@ import com.example.myapplication.model.playlistmodel.PlaylistResult
 import com.example.myapplication.model.starsmodel.StarResult
 import kotlinx.android.synthetic.main.cell_albums.view.*
 
-class PlaylistsAdapter(val items: List<PlaylistResult>, val context: Context, val fragment: PlaylistsActivity) :
+class PlaylistsAdapter(val items: List<PlaylistResult>, val context: Context, val fragment: PlaylistsActivity,val playListClickListener: PlayListClickListener) :
     RecyclerView.Adapter<PlaylistsViewHolder>() {
     private var selectPosition: Int = -1
     private var oldPosition: Int = -1
@@ -34,7 +34,7 @@ class PlaylistsAdapter(val items: List<PlaylistResult>, val context: Context, va
                 this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
-                    context.startActivity(Intent(context,PlaylistActivity::class.java).putExtra("id",items[position].playlistId.toString()).putExtra("title",items[position].name))
+                    playListClickListener.onClick(position,items[position].playlistId)
                 }
             } catch (e: Exception) {
                     e.printStackTrace()
@@ -46,7 +46,9 @@ class PlaylistsAdapter(val items: List<PlaylistResult>, val context: Context, va
         return items.size
     }
 }
-
+interface PlayListClickListener {
+    fun onClick( position: Int,id:Int)
+}
 class PlaylistsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val cellLayout:RelativeLayout=view.cell_layout
     val mAlbumTitleTextView:TextView=view.album_title

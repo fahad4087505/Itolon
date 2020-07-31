@@ -8,7 +8,15 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class UserDownloadResult implements Serializable {
+    private String  duration;
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
     @SerializedName("song_id")
     @Expose
     private Integer songId;

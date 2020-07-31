@@ -83,4 +83,5 @@
     <string name="search">Search</string>
     <string name="profile">Profile</string>
     <string name="artists_in_playlist">Artists in Playlist</string>
+    <string name="server_is_not_responding">Server is not responding</string>
 </resources>

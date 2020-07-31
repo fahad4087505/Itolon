@@ -1,19 +1,17 @@
 
-package com.example.myapplication.model.playlistdetailmodel;
+package com.example.myapplication.model.addtoplaylistmodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class PlaylistDetail implements Serializable {
+public class AddToPlaylistModel {
 
     @SerializedName("meta")
     @Expose
     private Meta meta;
     @SerializedName("result")
     @Expose
-    private PlaylistResult result;
+    private Result result;
 
     public Meta getMeta() {
         return meta;
@@ -23,11 +21,11 @@ public class PlaylistDetail implements Serializable {
         this.meta = meta;
     }
 
-    public PlaylistResult getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(PlaylistResult result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 

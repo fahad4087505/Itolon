@@ -9,11 +9,15 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.app.colepower.view.CustomProgressBar
 import com.example.myapplication.R
 import com.example.myapplication.prefrences.SharedPref
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.kishandonga.csbx.CustomSnackbar
+import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.android.synthetic.main.alert_dialog.view.*
 import java.util.*
 
@@ -72,5 +76,23 @@ open class BaseActivity : AppCompatActivity() {
 //        val refresh =
 //        startActivity(Intent(activity!!, LoginOptionActivity::class.java))
     }
-
+    fun showSnackBar(message:String,hideAction:Boolean): PublishSubject<Boolean> {
+        val res= PublishSubject.create<Boolean>()
+        CustomSnackbar(this).show {
+            customView(R.layout.snack_layout)
+            padding(10)
+            duration(BaseTransientBottomBar.LENGTH_LONG)
+            withCustomView {
+                it.findViewById<TextView>(R.id.message_textview).text = message
+                if(hideAction) {
+                    it.findViewById<View>(R.id.btnUndo).visibility=View.VISIBLE
+                    it.findViewById<View>(R.id.btnUndo).setOnClickListener {
+                        dismiss()
+                        res.onNext(true)
+                    }
+                }
+            }
+        }
+        return res
+    }
 }

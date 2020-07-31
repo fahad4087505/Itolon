@@ -1,6 +1,8 @@
 package com.example.myapplication.activities
 
 import android.content.Intent
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,6 +21,7 @@ import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
 import com.example.myapplication.model.userdownloadsmodel.UserDownloadModel
 import com.example.myapplication.model.userdownloadsmodel.UserDownloadResult
+import com.example.myapplication.prefrences.Constants
 import com.example.myapplication.prefrences.SharedPref
 import com.example.myapplication.utils.Utils
 import com.example.myapplication.utils.ViewUtils
@@ -49,9 +52,13 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
     var clickPosition=-1
     var items: MutableList<UserDownloadResult> = mutableListOf()
     var searchItem: MutableList<UserDownloadResult> = mutableListOf()
-
+    private var mediaPlayer: MediaPlayer? = null
+    private var duration=""
+    var playFilePath=""
+    var playSongPosition=-1
     private lateinit var userDownloadsViewModel: UserDownloadsViewModel
-
+    val songsArrayList=ArrayList<String>()
+    val videoArrayList=ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userDownloadsViewModel = ViewModelProvider.NewInstanceFactory().create(UserDownloadsViewModel::class.java)
@@ -168,9 +175,6 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
             val gson = Gson()
             val json = gson.toJson(tokenResponse)
             val jsonResponse = JSONObject(json)
-            if(progressBar.dialog.isShowing) {
-                progressBar.dialog.dismiss()
-            }
             if (jsonResponse.has("body")) {
                 val body = jsonResponse.getJSONObject("body")
                 val response = gson.fromJson(body.toString(), UserDownloadModel::class.java)
@@ -178,46 +182,112 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
                     if(response.result!=null&&response.result.size>0) {
                         trackVisibility(true)
                         items.addAll(response.result)
+                        for(i in 0 until response.result.size){
+                            downloadFile("http://44.231.47.188"+response.result[i].content.filePath)
+                            items[i].duration=getDuration("http://44.231.47.188"+response.result[i].content.filePath)
+                        }
                     }else{
                         trackVisibility(false)
                     }
+                    progressBar.dialog.dismiss()
                     feedRecyclerview.adapter!!.notifyDataSetChanged()
                 } else {
                     trackVisibility(false)
+                    progressBar.dialog.dismiss()
                     showErrorDialog(response.meta.message)
                 }
+
             }else{
+                if(progressBar.dialog.isShowing) {
+                    progressBar.dialog.dismiss()
+                }
                 trackVisibility(false)
                 showErrorDialog("Server is not responding")
             }
         })
     }
     private fun downloadFile(url: String) {
-        progressBar.show(this)
+        if(!progressBar.dialog.isShowing) {
+            progressBar.show(this)
+        }
         FileLoader.with(this).load(url, false) //2nd parameter is optioal, pass true to force load from network
-            .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object :
-                FileRequestListener<File> {
+            .fromDirectory("Itolon", FileLoader.DIR_EXTERNAL_PUBLIC).asFile(object : FileRequestListener<File> {
                 override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
                     val loadedFile = response.body
-                    progressBar.dialog.dismiss()
-                    if(loadedFile.path. contains(".mp3")) {
-                        startActivity(Intent(this@UserDownloadActivity, TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentItemDownloaded", items.get(clickPosition)))
+//                    filePath = loadedFile.path
+                    if(loadedFile.path.contains(".mp3")) {
+                        songsArrayList.add(loadedFile.path)
+//                        startActivity(Intent(this@PlaylistActivity, TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentPlaylistItemTrack", items[clickPosition]))
                     }else{
-                        startActivity(
-                            Intent(this@UserDownloadActivity, VideoPlayActivity::class.java).putExtra("filePath",loadedFile.path))
+                        videoArrayList.add(loadedFile.path)
                     }
                     clickPosition=-1
+                    if(progressBar.dialog.isShowing) {
+                        progressBar.dialog.dismiss()
+                    }
                 }
                 override fun onError(request: FileLoadRequest, t: Throwable) {
-                    progressBar.dialog.dismiss()
-                    showSnackBar(this@UserDownloadActivity,"File format not supported",true,"")
+                    if(progressBar.dialog.isShowing) {
+                        progressBar.dialog.dismiss()
+                    }
                 }
             })
     }
-
+//    private fun downloadFile(url: String) {
+//        progressBar.show(this)
+//        FileLoader.with(this).load(url, false) //2nd parameter is optioal, pass true to force load from network
+//            .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object :
+//                FileRequestListener<File> {
+//                override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
+//                    val loadedFile = response.body
+//                    progressBar.dialog.dismiss()
+//                    if(loadedFile.path. contains(".mp3")) {
+//                        startActivity(Intent(this@UserDownloadActivity, TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentItemDownloaded", items.get(clickPosition)))
+//                    }else{
+//                        startActivity(Intent(this@UserDownloadActivity, VideoPlayActivity::class.java).putExtra("filePath",loadedFile.path))
+//                    }
+//                    clickPosition=-1
+//                }
+//                override fun onError(request: FileLoadRequest, t: Throwable) {
+//                    progressBar.dialog.dismiss()
+//                    showSnackBar(this@UserDownloadActivity,"File format not supported",true,"")
+//                }
+//            })
+//    }
+    private fun getDuration(filePath: String):String {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer()
+        }
+        mediaPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mediaPlayer!!.setDataSource(filePath)
+        mediaPlayer!!.prepare()
+        duration = Utils.getInstance().getDurationInMinutes(mediaPlayer!!.duration.toLong())
+        return duration
+    }
     override fun onClick(position: Int, songUrl: String) {
         clickPosition=position
-        downloadFile(songUrl)
+        if(songUrl.contains(".mp3"))
+        {
+            Constants.songsArrayList.clear()
+            Constants.songsArrayList.addAll(songsArrayList)
+            playSongPosition=computePosition(songUrl)
+            if(playSongPosition!=-1) {
+                startActivity(Intent(this@UserDownloadActivity, TeaserActivity::class.java).putExtra("position", playSongPosition).putExtra("currentPlaylistItemTrack", items[clickPosition]))
+                playSongPosition = -1
+            }else{
+                showSnackBar("File is not exist",false)
+            }
+        }else{
+            Constants.songsArrayList.clear()
+            Constants.songsArrayList.addAll(videoArrayList)
+            playSongPosition=computePosition(songUrl)
+            if(playSongPosition!=-1) {
+                startActivity(Intent(this@UserDownloadActivity, VideoPlayActivity::class.java).putExtra("position", playSongPosition))
+            }else{
+                showSnackBar("File is not exist",false)
+            }
+        }
+//        downloadFile(songUrl)
     }
 
     private fun trackVisibility(flag:Boolean){
@@ -229,5 +299,14 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
             no_result_textview.visibility= View.VISIBLE
         }
     }
-
+    private fun computePosition(songUrl: String):Int{
+        val fileName=Utils.getInstance().getLastString(songUrl)
+        for(i in 0 until Constants.songsArrayList.size){
+            if(Constants.songsArrayList.get(i).contains(fileName)){
+                playSongPosition=i
+                playFilePath= Constants.songsArrayList.get(i)
+            }
+        }
+        return playSongPosition
+    }
 }
