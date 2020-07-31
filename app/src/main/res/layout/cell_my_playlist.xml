@@ -20,8 +20,8 @@
             android:layout_weight="0.15">
 
             <ImageView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -65,6 +65,7 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:id="@+id/add_to_playlist"
+                android:visibility="gone"
                 android:layout_margin="@dimen/_8sdp"
                 android:src="@drawable/playlist" />
             <com.google.android.material.textview.MaterialTextView
@@ -73,6 +74,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/_6sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:visibility="gone"
                 android:id="@+id/duration_textview"
                 android:gravity="center_vertical|right"
                 android:textColor="@color/white"

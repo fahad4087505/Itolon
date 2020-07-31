@@ -40,7 +40,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
             bottom_navigation.inflateMenu(R.menu.bottom_navigation_menu)
         }
         bottom_navigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
-        Dexter.withContext(this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,  Manifest.permission.WRITE_EXTERNAL_STORAGE).withListener(object :
+        Dexter.withContext(this).withPermissions(Manifest.permission.CAMERA,  Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.WRITE_EXTERNAL_STORAGE).withListener(object :
             MultiplePermissionsListener {
             override fun onPermissionsChecked(report: MultiplePermissionsReport) {
             }
