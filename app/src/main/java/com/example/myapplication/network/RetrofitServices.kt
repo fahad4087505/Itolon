@@ -9,6 +9,7 @@ import com.example.myapplication.model.allartistmodel.AllArtistModel
 import com.example.myapplication.model.albummodel.Album
 import com.example.myapplication.model.application.Application
 import com.example.myapplication.model.artistdetailmodel.ArtistDetail
+import com.example.myapplication.model.categoriessongmodel.CategoriesSongModel
 import com.example.myapplication.model.categorymodel.CategoryModel
 import com.example.myapplication.model.createplaylistmodel.CreatePlaylistModel
 import com.example.myapplication.model.defaultmodel.DefaultModel
@@ -85,6 +86,9 @@ interface RetrofitServices {
 
     @POST("/api/user/playlist_songs")
     fun getPlaylistDetail(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<PlaylistDetail>>
+
+    @POST("/api/user/categories_songs")
+    fun getCategoriesSongs(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<CategoriesSongModel>>
 
     @POST("/api/user/create_update_playlist")
     fun createPlaylist(@QueryMap hashMap: HashMap<String, String>): LiveData<ApiResponse<CreatePlaylistModel>>

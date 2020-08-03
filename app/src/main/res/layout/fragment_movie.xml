@@ -27,7 +27,7 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/_3sdp"
-                android:text="JAZZ"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
@@ -37,6 +37,8 @@
                 android:layout_height="wrap_content"
                 android:background="#1e2541"
                 app:elevation="4dp"
+                android:scrollbars="horizontal"
+                app:tabMode="scrollable"
                 app:tabIndicatorHeight="0dp"
                 app:tabSelectedTextColor="#8d2648"
                 app:tabTextColor="#ffffff" />

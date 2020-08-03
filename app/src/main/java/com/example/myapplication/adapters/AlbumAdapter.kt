@@ -34,7 +34,8 @@ class AlbumAdapter(val items: List<Result>, val context: Context, val fragment: 
                 this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].title
                 holder.cellLayout.setOnClickListener {
-                    context.startActivity(Intent(context, CartActivity::class.java).putExtra("albumId",items[position].id.toString()))
+                    context.startActivity(Intent(context, AlbumsActivity::class.java).putExtra("albumId",items[position].id.toString()))
+//                    context.startActivity(Intent(context, CartActivity::class.java).putExtra("albumId",items[position].id.toString()))
                 }
             } catch (e: ClassCastException) {
                 throw ClassCastException("Fragment must implement AdapterCallback.")

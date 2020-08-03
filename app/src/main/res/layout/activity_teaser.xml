@@ -301,7 +301,7 @@
             android:id="@+id/refresh_music_player"
             android:layout_marginBottom="@dimen/_20sdp"
             android:src="@drawable/replay_icon"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="?attr/selectableItemBackground"
             android:paddingLeft="@dimen/_2sdp"
             android:paddingRight="@dimen/_2sdp">
         </ImageView>

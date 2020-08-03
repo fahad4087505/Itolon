@@ -29,8 +29,8 @@ class AlbumsFragment : Fragment() {
         view.tabLayout!!.addTab(view.tabLayout!!.newTab().setText("Playlists"))
         view.tabLayout!!.addTab(view.tabLayout!!.newTab().setText("Artists"))
         view.tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-        val adapter = ViewPagerAdapter(childFragmentManager, view.tabLayout!!.tabCount)
-        view.viewPager!!.adapter = adapter
+//        val adapter = ViewPagerAdapter(childFragmentManager, view.tabLayout!!.tabCount)
+//        view.viewPager!!.adapter = adapter
         view.viewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(view.tabLayout))
         view.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

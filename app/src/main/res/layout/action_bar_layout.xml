@@ -19,7 +19,7 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_2sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginLeft="@dimen/_2sdp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
     </RelativeLayout>
