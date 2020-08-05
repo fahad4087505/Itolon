@@ -42,6 +42,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_45sdp"
+                android:id="@+id/random_icon_imageview"
                 android:src="@drawable/setting_icon" />
 
             <ImageView
@@ -49,6 +50,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
+                android:id="@+id/previous_song_play_icon"
                 android:layout_marginLeft="@dimen/_85sdp"
                 android:src="@drawable/next_play_icon" />
 
@@ -67,6 +69,7 @@
                 android:layout_alignLeft="@+id/play_icon"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
+                android:id="@+id/next_song_play_icon"
                 android:layout_marginLeft="@dimen/_52sdp"
                 android:src="@drawable/previous_play_icon" />
 
@@ -75,6 +78,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
+                android:id="@+id/replay_icon_imageview"
                 android:layout_marginLeft="@dimen/_215sdp"
                 android:src="@drawable/replay_icon" />
         </RelativeLayout>

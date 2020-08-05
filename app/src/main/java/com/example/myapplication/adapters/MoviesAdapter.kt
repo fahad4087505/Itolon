@@ -25,8 +25,8 @@ class MoviesAdapter(val items: List<String>, val context: Context, val fragment:
     }
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
             } catch (e: ClassCastException) {
                 throw ClassCastException("Fragment must implement AdapterCallback.")
             }

@@ -42,7 +42,7 @@ import org.json.JSONObject
 import java.io.File
 import java.util.HashMap
 
-class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface, DownloadSongClickListener {
+class UserDownloadActivity : BaseActivity(),  DownloadSongClickListener {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
     var totalItems: Int = 0
@@ -78,7 +78,7 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if(!s.toString().isNullOrEmpty()){
-                    searchValue(s.toString())
+                    searchValue(s.toString().toLowerCase())
                 }
                 else{
                     setAdapter(items)
@@ -126,7 +126,7 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
     private fun searchValue(value: String) {
         searchItem.clear()
         for (i in 0 until items.size) {
-            if (items[i].name.contains(value)) {
+            if (items[i].name.toLowerCase().contains(value.toLowerCase())) {
                 searchItem.add(items[i])
             }
         }
@@ -153,16 +153,6 @@ class UserDownloadActivity : BaseActivity(), FeedLikeClickInterface, ClickInterf
                 }
             }
         })
-    }
-
-    override fun showDialog(check: Boolean?, audioUrl: String?, trackId: String?, position: Int) {
-
-    }
-
-    override fun click(param: String?, imageView: ImageView?, textView: TextView?) {
-    }
-
-    override fun clickListener(id: String?, postId: String?, likeStatus: Int, shareUrl: String?, position: Int) {
     }
 
     private fun setAdapter(itemsArray:MutableList<UserDownloadResult>){

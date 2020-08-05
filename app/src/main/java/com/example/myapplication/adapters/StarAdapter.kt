@@ -32,11 +32,12 @@ class StarAdapter(val items: List<StarResult>, val context: Context, val fragmen
     }
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
-                    context.startActivity(Intent(context, ArtistsActivity::class.java).putExtra("artistId",items[position].artistId.toString()).putExtra("name",items[position].name))
+                    context.startActivity(Intent(context, AlbumsActivity::class.java).putExtra("artistId",items[position].artistId.toString()).putExtra("name",items[position].name))
+//                    context.startActivity(Intent(context, ArtistsActivity::class.java).putExtra("artistId",items[position].artistId.toString()).putExtra("name",items[position].name))
                 }
             } catch (e: Exception) {
 e.printStackTrace()            }

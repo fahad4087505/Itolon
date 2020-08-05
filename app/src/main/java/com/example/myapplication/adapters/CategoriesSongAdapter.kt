@@ -31,8 +31,8 @@ class CategoriesSongAdapter(val items: List<Song>, val context: Context, val fra
     }
     override fun onBindViewHolder(holder: CategorySongViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
                     if(items[position].content!=null){

@@ -29,11 +29,12 @@ class AllArtistAdapter(val items: List<AllArtistResult>, val context: Context, v
     }
     override fun onBindViewHolder(holder: AllArtistViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
-                    context.startActivity(Intent(context,ArtistsActivity::class.java).putExtra("artistId",items[position].userId.toString()).putExtra("name",items[position].name))
+                    context.startActivity(Intent(context,AlbumsActivity::class.java).putExtra("artistId",items[position].userId.toString()).putExtra("name",items[position].name))
+//                    context.startActivity(Intent(context,ArtistsActivity::class.java).putExtra("artistId",items[position].userId.toString()).putExtra("name",items[position].name))
                 }
             } catch (e: ClassCastException) {
                 throw ClassCastException("Fragment must implement AdapterCallback.")

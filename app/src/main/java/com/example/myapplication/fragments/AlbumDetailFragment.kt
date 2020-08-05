@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.fragment_album_detail.view.no_result_textv
 import kotlinx.android.synthetic.main.fragment_album_detail.view.swipeToRefresh
 import java.io.File
 
-class AlbumDetailFragment(val songsList:ArrayList<Song>) : Fragment(), FeedLikeClickInterface, ClickInterface,
+class AlbumDetailFragment(val songsList:ArrayList<Song>) : Fragment(),
     CategorySongClickListener {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
@@ -116,18 +116,10 @@ class AlbumDetailFragment(val songsList:ArrayList<Song>) : Fragment(), FeedLikeC
         mView!!.feedRecyclerview?.layoutManager = manager
 
     }
-    override fun showDialog(check: Boolean?, audioUrl: String?, trackId: String?, position: Int) {
 
-    }
-    override fun click(url: String, imageView: ImageView, textView: TextView) {
-        mImageView = imageView
-    }
 
     override fun onStop() {
         super.onStop()
-    }
-
-    override fun clickListener(id: String?, postId: String?, likeStatus: Int, shareUrl: String?, position: Int) {
     }
 
     override fun onClick(position: Int, songUrl: String) {

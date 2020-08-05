@@ -26,8 +26,8 @@ class AlbumDetailAdapter(val items: List<String>, val context: Context, val frag
     override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
         try {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
             } catch (e: ClassCastException) {
                 throw ClassCastException("Fragment must implement AdapterCallback.")
             }

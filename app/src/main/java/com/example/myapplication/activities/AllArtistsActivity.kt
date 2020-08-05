@@ -45,7 +45,7 @@ import kotlinx.android.synthetic.main.fragment_search_track.title_textview
 import org.json.JSONObject
 import java.util.HashMap
 
-class AllArtistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface {
+class AllArtistsActivity : BaseActivity() {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
     var totalItems: Int = 0
@@ -77,7 +77,7 @@ class AllArtistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterfac
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if(!s.toString().isNullOrEmpty()){
-                    searchValue(s.toString())
+                    searchValue(s.toString().toLowerCase())
                 }
                 else{
                     setAdapter(items)
@@ -120,7 +120,7 @@ class AllArtistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterfac
     private fun searchValue(value: String) {
         searchItem.clear()
         for (i in 0 until items.size) {
-            if (items[i].name.contains(value)) {
+            if (items[i].name.toLowerCase().contains(value.toLowerCase())) {
                 searchItem.add(items[i])
             }
         }
@@ -147,16 +147,6 @@ class AllArtistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterfac
                 }
             }
         })
-    }
-
-    override fun showDialog(check: Boolean?, audioUrl: String?, trackId: String?, position: Int) {
-
-    }
-
-    override fun click(param: String?, imageView: ImageView?, textView: TextView?) {
-    }
-
-    override fun clickListener(id: String?, postId: String?, likeStatus: Int, shareUrl: String?, position: Int) {
     }
 
     private fun setAdapter(itemsArray:MutableList<AllArtistResult>){

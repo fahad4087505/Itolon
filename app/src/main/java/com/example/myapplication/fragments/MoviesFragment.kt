@@ -17,7 +17,7 @@ import com.example.myapplication.interfaces.ClickInterface
 import com.example.myapplication.interfaces.FeedLikeClickInterface
 import kotlinx.android.synthetic.main.fragment_album_detail.view.*
 
-class MoviesFragment : Fragment(), FeedLikeClickInterface, ClickInterface {
+class MoviesFragment : Fragment() {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
     var totalItems: Int = 0
@@ -70,17 +70,8 @@ class MoviesFragment : Fragment(), FeedLikeClickInterface, ClickInterface {
         })
     }
 
-    override fun showDialog(check: Boolean?, audioUrl: String?, trackId: String?, position: Int) {
-
-    }
-    override fun click(url: String, imageView: ImageView, textView: TextView) {
-        mImageView = imageView
-    }
-
     override fun onStop() {
         super.onStop()
     }
-    override fun clickListener(id: String?, postId: String?, likeStatus: Int, shareUrl: String?, position: Int) {
 
-    }
 }

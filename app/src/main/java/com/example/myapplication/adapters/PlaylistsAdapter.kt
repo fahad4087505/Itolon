@@ -30,8 +30,8 @@ class PlaylistsAdapter(val items: List<PlaylistResult>, val context: Context, va
     }
     override fun onBindViewHolder(holder: PlaylistsViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
                     playListClickListener.onClick(position,items[position].playlistId)

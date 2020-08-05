@@ -30,8 +30,8 @@ class UserDownloadAdapter(val items: List<UserDownloadResult>, val context: Cont
     }
     override fun onBindViewHolder(holder: UserDownloadsViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
                     downloadSongClickListener.onClick(position,"http://44.231.47.188"+items[position].content.filePath)

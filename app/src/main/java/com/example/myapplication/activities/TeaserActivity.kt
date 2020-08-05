@@ -229,7 +229,7 @@ class TeaserActivity : BaseActivity() {
     }
     override fun onDestroy() {
         super.onDestroy()
-        stopMediaPlayer()
+//        stopMediaPlayer()
     }
 
     private fun startTime() {
@@ -289,7 +289,7 @@ class TeaserActivity : BaseActivity() {
 
     override fun onStop() {
         super.onStop()
-        stopMediaPlayer()
+//        stopMediaPlayer()
     }
 
 
@@ -302,6 +302,14 @@ class TeaserActivity : BaseActivity() {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
+            moveTaskToBack(true)
+        } else {
+            super.onBackPressed()
         }
     }
 }

@@ -26,8 +26,8 @@ class SearchAdapter(val items: List<String>, val context: Context, val fragment:
     }
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
             try {
-                this.mClickInterface = fragment
-                this.mPostDetails = fragment
+//                this.mClickInterface = fragment
+//                this.mPostDetails = fragment
                 holder.cellLayout.setOnClickListener {
                     context.startActivity(Intent(context,AlbumsActivity::class.java))
                 }

@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -164,9 +163,16 @@ class FeedFragment : Fragment(), FeedLikeClickInterface, ClickInterface, Recycle
     override fun click(url: String, imageView: ImageView, textView: TextView) {
     }
 
+    override fun previousButtonClick(position: Int) {
+
+    }
+
+    override fun nextButtonClick(position: Int) {
+    }
+
     override fun onStop() {
         super.onStop()
-        stopMediaPlayer()
+//        stopMediaPlayer()
         if(progressBar.dialog.isShowing) {
             progressBar.dialog.dismiss()
         }
@@ -239,6 +245,21 @@ class FeedFragment : Fragment(), FeedLikeClickInterface, ClickInterface, Recycle
         stopMediaPlayer()
     }
 
+    override fun previousButtonClick(position: Int, songUrl: String) {
+        mView!!.feedRecyclerview.scrollToPosition(position)
+        downloadFile(songUrl)
+    }
+
+    override fun nextButtonClick(position: Int, songUrl: String) {
+        mView!!.feedRecyclerview.scrollToPosition(position)
+        downloadFile(songUrl)
+    }
+
+    override fun randomButtonClick(position: Int, songUrl: String) {
+        mView!!.feedRecyclerview.scrollToPosition(position)
+        downloadFile(songUrl)
+    }
+
     override fun onPause() {
         super.onPause()
         Utils.getInstance().killMediaPlayer(null)
@@ -259,6 +280,7 @@ class FeedFragment : Fragment(), FeedLikeClickInterface, ClickInterface, Recycle
                     val loadedFile = response.body
                     filePath = loadedFile.path
                     progressBar.dialog.dismiss()
+                    stopMediaPlayer()
                     playMusic(filePath)
                 }
                 override fun onError(request: FileLoadRequest, t: Throwable) {

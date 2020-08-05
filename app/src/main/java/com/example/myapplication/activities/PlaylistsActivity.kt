@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_search_track.*
 import org.json.JSONObject
 import java.util.*
 
-class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface,
+class PlaylistsActivity : BaseActivity(),
     PlayListClickListener {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
@@ -69,8 +69,8 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
             override  fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if(!s.toString().isNullOrEmpty()){
-                    searchValue(s.toString())
+                if(!s.toString().toLowerCase().isNullOrEmpty()){
+                    searchValue(s.toString().toLowerCase())
                 }
                 else{
                     setAdapter(items)
@@ -93,7 +93,7 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
     private fun searchValue(value: String) {
         searchItem.clear()
         for (i in 0 until items.size) {
-            if (items[i].name.contains(value)) {
+            if (items[i].name.toLowerCase().contains(value.toLowerCase())) {
                 searchItem.add(items[i])
             }
         }
@@ -155,16 +155,6 @@ class PlaylistsActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface
                 }
             }
         })
-    }
-
-    override fun showDialog(check: Boolean?, audioUrl: String?, trackId: String?, position: Int) {
-
-    }
-
-    override fun click(param: String?, imageView: ImageView?, textView: TextView?) {
-    }
-
-    override fun clickListener(id: String?, postId: String?, likeStatus: Int, shareUrl: String?, position: Int) {
     }
 
     private fun setAdapter(itemsArray:MutableList<PlaylistResult>){

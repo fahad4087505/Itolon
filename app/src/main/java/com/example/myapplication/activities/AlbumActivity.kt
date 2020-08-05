@@ -63,7 +63,7 @@ class AlbumActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
               if(!s.toString().isNullOrEmpty()){
-                    searchValue(s.toString())
+                    searchValue(s.toString().toLowerCase())
               }
                 else{
                   setAdapter(items)
@@ -99,7 +99,7 @@ class AlbumActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface {
     private fun searchValue(value: String) {
         searchItem.clear()
         for (i in 0 until items.size) {
-            if (items[i].title.contains(value)) {
+            if (items[i].title.toLowerCase().contains(value.toLowerCase())) {
                 searchItem.add(items[i])
             }
         }
@@ -165,6 +165,13 @@ class AlbumActivity : BaseActivity(), FeedLikeClickInterface, ClickInterface {
     }
 
     override fun click(param: String?, imageView: ImageView?, textView: TextView?) {
+    }
+
+    override fun previousButtonClick(position: Int) {
+
+    }
+
+    override fun nextButtonClick(position: Int) {
     }
 
     override fun clickListener(id: String?, postId: String?, likeStatus: Int, shareUrl: String?, position: Int) {
