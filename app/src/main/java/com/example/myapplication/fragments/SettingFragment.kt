@@ -167,7 +167,7 @@ class SettingFragment : Fragment() {
                 val response = gson.fromJson(body.toString(), Profile::class.java)
                 if (response.meta.code == 205) {
                     mView!!.user_name_textview.text=response.result.name +" "+response.result.secondName
-                    Glide.with(activity!!).load("http://44.231.47.188"+response.result.photo).error(R.drawable.logo).placeholder(R.drawable.logo).into(profile_image)
+                    Glide.with(activity!!).load("http://44.231.47.188"+response.result.photo).error(R.drawable.ic_user).placeholder(R.drawable.ic_user).into(profile_image)
                 }
             }
         })
