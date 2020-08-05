@@ -60,8 +60,8 @@
     <string name="login">Connexion </string>
     <string name="mes_telechargements">Mes Telechargements</string>
 <!--    <string name="Artists">Artistes</string>-->
-    <string name="albems"> Albems</string>
-    <string name="stars">Haut Étoiles</string>
+    <string name="albems"> Albums</string>
+    <string name="stars">Top Stars</string>
     <string name="video"> Vidéo</string>
     <string name="artist_profile">Profil de l\'artiste </string>
     <string name="artist_image">Image de l\'artiste </string>
