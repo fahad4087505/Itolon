@@ -1,11 +1,12 @@
 
 package com.example.myapplication.model.categoriessongmodel;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CategoriesSongModel {
+public class CategoriesSongModel implements Serializable {
 
     @SerializedName("meta")
     @Expose

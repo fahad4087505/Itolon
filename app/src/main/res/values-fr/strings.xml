@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Itolon</string>
     <string name="feed">Accueil</string>
     <string name="search_track">Rechercher une piste</string>
@@ -82,6 +82,8 @@
     <string name="home">Accueil</string>
     <string name="search">Chercher</string>
     <string name="profile">Profil</string>
+<!--    <string name="playlist" tools:ignore="DuplicateDefinition,ExtraTranslation">Playlist</string>-->
     <string name="artists_in_playlist">Artistes dans la playlist</string>
     <string name="server_is_not_responding">Server is not responding</string>
+    <string name="your_library">Votre bibliothèque</string>
 </resources>

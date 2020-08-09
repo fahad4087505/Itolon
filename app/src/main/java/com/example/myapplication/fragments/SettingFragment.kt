@@ -89,7 +89,7 @@ class SettingFragment : Fragment() {
                     source: EasyImage.ImageSource?,
                     type: Int
                 ) {
-                    Glide.with(requireActivity()).load(imageFile!!).placeholder(R.drawable.logo).error(R.drawable.logo).into(profile_image)
+                    Glide.with(requireActivity()).load(imageFile!!).placeholder(R.drawable.ic_user_profile).error(R.drawable.ic_user_profile).into(profile_image)
 //                    uploadFile(imageFile!!)
                 }
 

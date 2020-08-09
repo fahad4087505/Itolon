@@ -44,7 +44,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_40sdp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/logo"
                 android:tint="@color/white"
                 android:visibility="gone" />
 

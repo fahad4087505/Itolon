@@ -90,7 +90,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             intent.putExtra("thread_id",threadId);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             pendingIntent = PendingIntent.getActivity(this, 1251, intent, PendingIntent.FLAG_ONE_SHOT);
-            builder.setContentTitle(title).setContentText(description).setSmallIcon(getNotificationIcon()).setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo)).setBadgeIconType(R.drawable.logo).setContentIntent(pendingIntent).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            builder.setContentTitle(title).setContentText(description).setSmallIcon(getNotificationIcon()).setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.itolon_logo)).setBadgeIconType(R.drawable.itolon_logo).setContentIntent(pendingIntent).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
             Notification notification = builder.build();
             notifManager.notify(0, notification);
         } else {
@@ -99,13 +99,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             PendingIntent pendingIntent = null;
             pendingIntent = PendingIntent.getActivity(this, 1251, intent, PendingIntent.FLAG_ONE_SHOT);
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this).setContentTitle(title).setContentText(description).setAutoCancel(true).setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo)).setColor(ContextCompat.getColor(getBaseContext(), R.color.white)).setSound(defaultSoundUri).setSmallIcon(getNotificationIcon()).setContentIntent(pendingIntent).setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle(title).bigText(description));
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this).setContentTitle(title).setContentText(description).setAutoCancel(true).setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.itolon_logo)).setColor(ContextCompat.getColor(getBaseContext(), R.color.white)).setSound(defaultSoundUri).setSmallIcon(getNotificationIcon()).setContentIntent(pendingIntent).setStyle(new NotificationCompat.BigTextStyle().setBigContentTitle(title).bigText(description));
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1251, notificationBuilder.build());
         }
     }
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.drawable.logo : R.drawable.logo;
+        return useWhiteIcon ? R.drawable.itolon_logo : R.drawable.itolon_logo;
     }
 }

@@ -36,7 +36,7 @@ class CategoriesSongAdapter(val items: List<Song>, val context: Context, val fra
                 holder.mAlbumTitleTextView.text=items[position].name
                 holder.cellLayout.setOnClickListener {
                     if(items[position].content!=null){
-                    categorySongClickListener.onClick(position,"http://44.231.47.188"+items[position].content.filePath)
+                    categorySongClickListener.onClick(position,"http://44.231.47.188"+items[position].content.filePath,items[position])
                 }}
             } catch (e: ClassCastException) {
                 throw ClassCastException("Fragment must implement AdapterCallback.")
@@ -49,7 +49,7 @@ class CategoriesSongAdapter(val items: List<Song>, val context: Context, val fra
     }
 }
 interface CategorySongClickListener {
-    fun onClick( position: Int,songUrl:String)
+    fun onClick( position: Int,songUrl:String,song:Song)
 }
 class CategorySongViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val cellLayout:RelativeLayout=view.cell_layout

@@ -4,7 +4,9 @@ package com.example.myapplication.model.postsmodel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Content {
+import java.io.Serializable;
+
+public class Content implements Serializable {
 
     @SerializedName("file_name")
     @Expose

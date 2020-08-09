@@ -1,11 +1,12 @@
 
 package com.example.myapplication.model.postsmodel;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PostResult {
+public class PostResult implements Serializable {
 
     @SerializedName("id")
     @Expose

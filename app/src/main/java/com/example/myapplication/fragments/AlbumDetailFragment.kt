@@ -60,7 +60,6 @@ class AlbumDetailFragment(val songsList:ArrayList<Song>) : Fragment(),
     }
 
     private fun init(view: View) {
-        Log.e("songsArrary",songsList.size.toString())
 //        if(songsList.size>0) {
             setAdapter(songsList)
 //            setVisibilty(true)
@@ -122,21 +121,23 @@ class AlbumDetailFragment(val songsList:ArrayList<Song>) : Fragment(),
         super.onStop()
     }
 
-    override fun onClick(position: Int, songUrl: String) {
+    override fun onClick(position: Int, songUrl: String,song:Song) {
         clickPosition=position
         downloadFile(songUrl)
 
     }
     private fun downloadFile(url: String) {
         progressBar.show(requireActivity())
-        FileLoader.with(requireActivity()).load(url, false) //2nd parameter is optioal, pass true to force load from network
+        FileLoader.with(requireActivity()).load(url, false)
             .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object :
                 FileRequestListener<File> {
                 override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
                     val loadedFile = response.body
                     progressBar.dialog.dismiss()
                     if(loadedFile.path. contains(".mp3")) {
-                        startActivity(Intent(requireActivity(), TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentCategoryItemDownloaded", items.get(clickPosition)))
+                        startActivity(Intent(requireActivity(), TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentCategoryItemDownloaded",
+                            songsList[clickPosition]
+                        ))
                     }else{
                         startActivity(Intent(requireActivity(), VideoPlayActivity::class.java).putExtra("filePath",loadedFile.path))
                     }

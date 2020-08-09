@@ -1,19 +1,17 @@
 package com.example.myapplication.activities
-import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.METADATA_KEY_DURATION
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapters.PlaylistAdapter
 import com.example.myapplication.adapters.PlaylistItemClickListener
@@ -30,12 +28,13 @@ import com.krishna.fileloader.listener.FileRequestListener
 import com.krishna.fileloader.pojo.FileResponse
 import com.krishna.fileloader.request.FileLoadRequest
 import kotlinx.android.synthetic.main.activity_playlists.*
+import kotlinx.android.synthetic.main.activity_playlists.back_arrow_imageview
+import kotlinx.android.synthetic.main.activity_playlists.profile_image
+import kotlinx.android.synthetic.main.activity_teaser.*
 import org.json.JSONObject
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.MutableList
-import kotlin.collections.mutableListOf
 import kotlin.collections.set
 
 class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
@@ -88,7 +87,6 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
     private fun setArtistsAdapter(){
         val layoutManager = LinearLayoutManager(this@PlaylistActivity,LinearLayoutManager.HORIZONTAL,false)
         artists_recyclerview.layoutManager = layoutManager
-//        artists_recyclerview.adapter = ArtistAdapter(items, this, this)
     }
 
     private fun pagination() {
@@ -120,9 +118,13 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
                 val body = jsonResponse.getJSONObject("body")
                 val response = gson.fromJson(body.toString(), PlaylistDetail::class.java)
                 if (response.meta.code == 205) {
+//                    Glide.with(this@PlaylistActivity).load("http://44.231.47.188" + response.result.artists!!.imagePath)
+//                        .placeholder(R.drawable.banner).error(R.drawable.banner).into(profile_image)
                     tracks_count.text=response.result.songs.size.toString()+" Tracks"
                     if(response.result.songs.size>0) {
                         trackVisibility(true)
+                        songsArrayList.clear()
+                        videoArrayList.clear()
                         items.addAll(response.result.songs)
                         for(i in 0 until response.result.songs.size){
                             downloadFile("http://44.231.47.188"+response.result.songs[i].content.filePath)
@@ -136,8 +138,6 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
                                 retriever.release()
                                 items[i].duration = Utils.getInstance().getDurationInMinutes(timeInMillisec)
                             }
-//                            items[i].duration=getMediaDuration(this@PlaylistActivity,"http://44.231.47.188"+response.result.songs[i].content.filePath).toString()
-//                            items[i].duration=gettotaltimestorage("http://44.231.47.188"+response.result.songs[i].content.filePath)
                         }
                         playlist_recyclerview.adapter!!.notifyDataSetChanged()
                         progressBar.dialog.dismiss()
@@ -160,8 +160,9 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
     }
 
     override fun onClick(position: Int, songUrl: String) {
+        playSongPosition=-1
+        Constants.songsArrayList.clear()
         clickPosition = position
-//        clickPosition=position
         if (songUrl.contains(".mp3")) {
             Constants.songsArrayList.addAll(songsArrayList)
             playSongPosition = computePosition(songUrl)
@@ -174,7 +175,7 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
         } else {
             Constants.songsArrayList.addAll(videoArrayList)
             playSongPosition = computePosition(songUrl)
-            if (playSongPosition != -1) {
+            if (playSongPosition != -1&&playSongPosition<items.size) {
                 startActivity(Intent(this@PlaylistActivity, VideoPlayActivity::class.java).putExtra("position", playSongPosition).putExtra("is_purchased",items[playSongPosition].isPurchased))
             } else {
                 showSnackBar("File is not exist", false)
@@ -190,26 +191,16 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
             .fromDirectory("test4", FileLoader.DIR_INTERNAL).asFile(object : FileRequestListener<File> {
                 override fun onLoad(request: FileLoadRequest, response: FileResponse<File>) {
                     val loadedFile = response.body
-//                    filePath = loadedFile.path
                     if(loadedFile.path.contains(".mp3")) {
                         songsArrayList.add(loadedFile.path)
-//                        startActivity(Intent(this@PlaylistActivity, TeaserActivity::class.java).putExtra("filePath", loadedFile.path).putExtra("currentPlaylistItemTrack", items[clickPosition]))
                     }else{
                         videoArrayList.add(loadedFile.path)
-//                        startActivity(Intent(this@PlaylistActivity, VideoPlayActivity::class.java).putExtra("filePath",loadedFile.path))
-//                        Toast.makeText(this@PlaylistActivity,"File not supported", Toast.LENGTH_LONG).show()
                     }
                     clickPosition=-1
                     progressBar.dialog.dismiss()
                 }
                 override fun onError(request: FileLoadRequest, t: Throwable) {
                     progressBar.dialog.dismiss()
-//                    startActivity(
-//                        Intent(
-//                            this@PlaylistActivity,
-//                            VideoPlayActivity::class.java
-//                        ))
-//                    Toast.makeText(this@ArtistsActivity,"File format not supported",Toast.LENGTH_LONG).show()
                 }
             })
     }
@@ -246,14 +237,5 @@ class PlaylistActivity : BaseActivity(), PlaylistItemClickListener {
             }
         }
         return playSongPosition
-    }
-    fun getMediaDuration(context: Context,filePath: String): Long {
-//        if (!exists()) return 0
-        val retriever = MediaMetadataRetriever()
-        retriever.setDataSource(context, Uri.parse(filePath))
-        val duration = retriever.extractMetadata(METADATA_KEY_DURATION)
-        retriever.release()
-
-        return duration.toLongOrNull() ?: 0
     }
 }

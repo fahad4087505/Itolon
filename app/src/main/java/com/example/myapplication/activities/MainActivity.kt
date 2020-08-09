@@ -67,6 +67,10 @@ class MainActivity : BaseActivity(), View.OnClickListener {
                     addFragment(ArtistProfileFragment(), false, "one")
                     return@OnNavigationItemSelectedListener true
                 }
+                R.id.navigation_playlist -> {
+                    addFragment(ArtistProfileFragment(), false, "one")
+                    return@OnNavigationItemSelectedListener true
+                }
                 R.id.navigation_statistics -> {
                     addFragment(StatisticsFragment(), false, "one")
                     return@OnNavigationItemSelectedListener true

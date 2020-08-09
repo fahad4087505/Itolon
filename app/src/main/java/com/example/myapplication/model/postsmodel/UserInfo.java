@@ -3,7 +3,9 @@ package com.example.myapplication.model.postsmodel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable {
 
     @SerializedName("user_id")
     @Expose

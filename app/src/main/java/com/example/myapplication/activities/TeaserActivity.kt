@@ -21,8 +21,9 @@ import java.util.concurrent.TimeUnit
 class TeaserActivity : BaseActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var albumDetailModel: Song? = null
-    private var playlistResult: PlaylistResult? = null
+    private var playlistResult: com.example.myapplication.model.playlistdetailmodel.Song? = null
     private var albumDetailModelDownloads: UserDownloadResult? = null
+    private var songsList: com.example.myapplication.model.categoriessongmodel.Song? = null
     private var albumDetailModelSong: com.example.myapplication.model.artistdetailmodel.Song? = null
     private var isPlayFlag = false
     private var timeWhenStopped: Long = 0
@@ -57,9 +58,11 @@ class TeaserActivity : BaseActivity() {
                 artist_name_textview.text = albumDetailModel!!.artistName
             }
             if (intent.hasExtra("currentPlaylistItemTrack")) {
-                playlistResult = intent.getSerializableExtra("currentPlaylistItemTrack") as PlaylistResult
-                track_name_textview.text = playlistResult!!.songs[position].name
-//                artist_name_textview.text = playlistResult!!.songs[position].
+                playlistResult = intent.getSerializableExtra("currentPlaylistItemTrack") as com.example.myapplication.model.playlistdetailmodel.Song
+                track_name_textview.text = playlistResult!!.name
+                Glide.with(this@TeaserActivity).load("http://44.231.47.188" + playlistResult!!.imagePath)
+                    .placeholder(R.drawable.banner).error(R.drawable.banner).into(profile_image)
+//                artist_name_textview.text = playlistResult!!
             }
             if (intent.hasExtra("currentItemDownloaded")) {
                 albumDetailModelDownloads = intent.getSerializableExtra("currentItemDownloaded") as UserDownloadResult
@@ -69,6 +72,17 @@ class TeaserActivity : BaseActivity() {
                 if (!albumDetailModelDownloads!!.artistName.isNullOrEmpty()) {
                     artist_name_textview.text = albumDetailModelDownloads!!.artistName
                 }
+            }
+            if (intent.hasExtra("currentCategoryItemDownloaded")) {
+                songsList = intent.getSerializableExtra("currentCategoryItemDownloaded") as com.example.myapplication.model.categoriessongmodel.Song
+                if (!songsList!!.name.isNullOrEmpty()) {
+                    track_name_textview.text = songsList!!.name
+                }
+                if (!songsList!!.artistName.isNullOrEmpty()) {
+                    artist_name_textview.text = songsList!!.artistName
+                }
+                Glide.with(this@TeaserActivity).load("http://44.231.47.188" + songsList!!.imagePath)
+                    .placeholder(R.drawable.banner).error(R.drawable.banner).into(profile_image)
             }
             if (intent.hasExtra("currentItemTrack")) {
                 albumDetailModelSong = intent.getSerializableExtra("currentItemTrack") as com.example.myapplication.model.artistdetailmodel.Song

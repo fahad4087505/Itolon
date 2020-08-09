@@ -4,7 +4,7 @@ package com.example.myapplication.model.addcommentsmodel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserInfo {
+public class UserInfo  {
 
     @SerializedName("user_id")
     @Expose

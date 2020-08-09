@@ -13,6 +13,8 @@ import com.example.myapplication.prefrences.SharedPref
 import com.example.myapplication.utils.Utils
 import com.example.myapplication.utils.ViewUtils
 import com.example.myapplication.viewmodel.LoginViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login_user.*
 import kotlinx.android.synthetic.main.activity_login_user.password_editText
@@ -50,8 +52,21 @@ class LoginActivity : BaseActivity() , AdapterView.OnItemSelectedListener {
 //        val customAdapter = CustomSpinnerAdapter(applicationContext, categories )
 //        spinner.setAdapter(customAdapter)
 //        spinner.onItemSelectedListener = this
+        getFcmToken()
     }
 
+    private fun getFcmToken(){
+        try {
+            FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@OnCompleteListener
+                }
+                val token = task.result?.token
+                SharedPref.write(SharedPref.REFRESH_TOKEN,token)
+            })
+        }catch (ignored:Exception){
+        }
+    }
     private fun callLoginApi(){
         if (Utils.getInstance().isNetworkConnected(this@LoginActivity)) {
             val hashMap = HashMap<String, String>()
