@@ -85,7 +85,7 @@ class PlaylistsActivity : BaseActivity(),
             finish()
         }
        search_imageview.setOnClickListener {
-            startActivity(Intent(this@PlaylistsActivity,SearchActivity::class.java))
+//            startActivity(Intent(this@PlaylistsActivity,SearchActivity::class.java))
         }
         feedRecyclerview?.adapter?.notifyDataSetChanged()
         pagination()
